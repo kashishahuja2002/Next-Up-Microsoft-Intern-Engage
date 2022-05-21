@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next Up | Movie</title>
+
+    <!-- Bootstrap stylesheet  -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" integrity="undefined" crossorigin="anonymous">
+
+    <!-- Local stylesheets  -->
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <!-- Select2 stylesheet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+
+</head>
+<body>
+    
+    <!-- Header -->
+    <nav class="navbar">
+        <img src="/static/images/logo.png" class="brand-logo" alt="">
+        <div class="right-container">
+            <select id="movieSelect" class="select2 form-control" onchange="movieSelect()" style="width: 250px;">
+                <option disabled hidden selected value="sm" id="search-movie">Search Movie</option>
+                {% for item in movie_names %}
+                <option value={{item}}>{{item}}</option>
+                {% endfor %}
+            </select>
+            <i class="fa fa-search"></i>
+            <a data-toggle="tooltip" title="Logout">
+                <img src="https://www.hotstar.com/assets/c724e71754181298e3f835e46ade0517.svg" alt="User logout" width="30px">
+            </a>
+        </div>
+    </nav>
+
+
+    <!-- Movie Section -->
+    <div class="container-fluid">
+        <div class="row movie-box">
+            <div class="movie-img col-md-7 d-md-none"></div>
+            <div class="movie-text col-md-5">
+                <div class="d-flex mx-auto">
+                    <div class="text-wrapper">
+                        <h2>{{movies.iloc[movie_idx].title}}</h2>
+                        {% if movies.iloc[movie_idx].tagline: %}
+                        <h4>{{movies.iloc[movie_idx].tagline}}</h4>
+                        {% endif %}
+                        <small>
+                        {% for item in movies.iloc[movie_idx].genres %}
+                            {{item}} .
+                        {% endfor %}
+                        </small> <br>
+                        <small>
+                        {% for item in movies.iloc[movie_idx].cast %}
+                            {{item}} .
+                        {% endfor %}
+                        </small> <br>
+                        {% if movies.iloc[movie_idx].release_date: %}
+                        <small>{{movies.iloc[movie_idx].release_date}}</small> <br><br>
+                        {% endif %}
+                        {% if movies.iloc[movie_idx].overview: %}
+                        <p>{{movies.iloc[movie_idx].overview}}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="movie-vid col-md-7 d-none d-md-block">
+                <!-- 5PSNL1qE6VY -->
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/{{trailer_key}}?autoplay=1&showinfo=0&controls=0&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Recommendations Section -->
+    <div class="container-fluid mb-3">
+
+        <div class="row">
+            <h4 class="title">More Like This</h4>
+        </div>
+
+        <div class="row movie-list">
+            {%for i in range(0, 6)%}
+            <div class="col-6 col-sm-4 col-md-2 movie-card"> 
+                <a href="{{recommendations[i]}}">
+                    <img src={{posters[i]}} class="card-img" alt="">
+                    <p>{{recommendations[i]}}</p>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+
+
+    <!-- JS/jQuery files  -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <!-- Select 2 script -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+    <!-- Local JS files  -->
+    <script src="/static/js/script.js"></script>
+
+</body>
+</html>

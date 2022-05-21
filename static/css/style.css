@@ -1,0 +1,283 @@
+:root {
+    --cyan: #13E0D5;
+    --white: #ffffff;
+    /* --black-body: #0c111b; */
+    --black-body: #131A27
+}
+
+body {
+    background-color: var(--black-body);
+    /* background-color: #000; */
+    width: 100%;
+    position: relative;
+    font-family: roboto, sans-serif;
+}
+
+a:hover {
+    text-decoration-color: var(--cyan);
+}
+
+
+/* Header */
+.navbar {
+    width: 100%;
+    height: 80px;
+    position: relative;
+    top: 0;
+    left: 0;
+    padding: 0 4%;
+    display: flex;
+    align-items: center;
+}
+
+.brand-logo {
+    height: 55px;
+}
+
+.right-container {
+    display: block;
+    margin-left: auto;
+}
+
+.select2-container--default .select2-selection--single {
+    background-color: var(--black-body)!important;
+    color: #fff;
+    border: none!important;
+    border-bottom: 1px solid #aaa!important;
+    border-radius: 0px!important;
+    text-transform: capitalize;
+    font-size: 16px;
+    font-weight: 500; 
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #fff!important;
+}
+
+.select2-selection__arrow {
+    display: none;
+}
+
+.select2-dropdown, .select2-container--open .select2-dropdown--below {
+    background-color: var(--black-body)!important;
+    color: #fff!important;
+    border: 1px solid #aaa;
+    border: none!important;
+    overflow-x: hidden;
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    background-color: var(--black-body);
+    border: 1px solid #fff;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.select2-results__options::-webkit-scrollbar {
+    display: none; /* Chrome */
+}
+
+.select2-results__options {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.select2 .select2-container .select2-container--default .select2-container--below .select2-container--open {
+    width: 250px!important;
+}
+
+
+i.fa-search {
+    color: #aaa;
+    position: relative;
+    right: 25px;
+}
+
+a {
+    cursor: pointer;
+}
+
+@media screen and (max-width: 576px) {
+    .navbar .brand-logo{
+        margin: auto;
+    }
+
+    .navbar .right-container{
+        margin: auto;
+    }
+
+    .search-box:focus {
+        width: 250px;
+    }
+} 
+
+
+/********* Movie Page **********/
+
+/* Movie Section */
+.movie-box {
+    color: #fff;
+    min-height: 60vh;
+    margin: 50px; 
+    margin-top: 0px;
+    border-radius: 1%;
+    background-color: #030B17;
+    /* background-color: #000; */
+}
+
+.movie-vid {
+    opacity: 0.6;
+    max-height: 600px;
+    min-height: 200px;
+    width: 100%;
+    background-position: 100%;
+    background-size: cover;
+    border-radius: 1%;
+    /* background-image: url(https://noamkroll.com/wp-content/uploads/2019/02/Why-Amazon-Prime-Could-Be-The-Best-Platform-To-Release-An-Independent-Feature-Film.jpg); */
+    /* background: url(/static/images/uncharted.jpg); */
+    /* box-shadow: inset 15vw -11px 72px 31px rgb(12 17 27 / 80%);
+    -webkit-box-shadow: 15vw -11px 72px 31px rgb(12 17 27 / 80%) inset;
+    -moz-box-shadow: 15vw -11px 72px 31px rgba(12,17,27,.80) inset; */
+    box-shadow: inset 15vw -11px 72px 31px rgb(0 0 0 / 80%);
+    -webkit-box-shadow: 15vw -11px 72px 31px rgb(0 0 0 / 80%) inset;
+    -moz-box-shadow: 15vw -11px 72px 31px rgba(0,0,0,.80) inset;
+}
+
+.movie-text {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.text-wrapper {
+    padding: 10px 5%;
+}
+
+/* Recommendations Section */
+.title {
+    color: #fff;
+    opacity: 0.9;
+    padding-left: 5%;
+    text-transform: capitalize;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.movie-list {
+    padding: 20px 50px;
+}
+
+.movie-card p {
+    color: #fff;
+    padding: 10px;
+}
+
+
+/********* Recommendations Page *********/
+
+/* Recommended for you section */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    padding: 20px 0;
+    overflow-x: hidden;
+    margin-bottom: 30px;
+}
+
+.carousel {
+    display: flex;
+    width: 92%;
+    height: 100%;
+    position: relative;
+    margin: auto;
+}
+
+.slider {
+    flex: 0 0 auto;
+    margin-right: 30px;
+    position: relative;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    transition: 1s;
+    overflow: hidden;
+}
+
+.slider img {
+    width: 70%;
+    min-height: 100%;
+    object-fit: cover;
+    display: block;
+    margin-left: auto;
+    border-radius: 5px;
+}
+
+.slider-content {
+    position: absolute;
+    width: 50%;
+    z-index: 2;
+    height: 100%;
+    background: linear-gradient(to right, #030b17 80%, #0c111b00);
+    color: #fff;
+}
+
+.movie-title {
+    padding-left: 50px;
+    text-transform: capitalize;
+    margin-top: 80px;
+}
+
+.movie-des {
+    width: 80%;
+    line-height: 20px;
+    padding-left: 50px;
+    margin-top: 30px;
+    opacity: 0.8;
+}
+
+.carousel-control-prev, .carousel-control-next {
+    visibility: hidden;
+}
+
+.carousel-container:hover .carousel-control-prev, .carousel-container:hover .carousel-control-next {
+    visibility: visible;
+} 
+
+.carousel-control-prev-icon {
+    position: relative;
+    left: -40%;
+}
+
+.carousel-control-next-icon {
+    position: relative;
+    right: -40%;
+}
+
+@media screen and (max-width: 576px) {
+    .movie-title {
+        margin-top: 30px;
+        font-size: 20px;
+        padding-left: 20px;
+    }
+
+    .movie-des {
+        line-height: 15px;
+        padding-left: 20px;
+        margin-top: 20px;
+        font-size: 12px;
+    }
+}
+
+/* Based on Section */
+select {
+    margin: 0 0 8px 20px;
+    outline: none;
+    background-color: var(--black-body);
+    color: #fff;
+    border: none;
+    border-bottom: 1px solid #fff;
+}

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next Up | Recommendations</title>
+
+    <!-- Bootstrap stylesheet  -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" integrity="undefined" crossorigin="anonymous">
+
+    <!-- Local stylesheets  -->
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <!-- Select2 stylesheet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+
+</head>
+<body>
+    
+    <!-- Header -->
+    <nav class="navbar">
+        <img src="/static/images/logo.png" class="brand-logo" alt="">
+        <div class="right-container">
+            <select id="movieSelect" class="select2 form-control" onchange="movieSelect()" style="width: 250px;">
+                <option disabled hidden selected value="sm" id="search-movie">Search Movie</option>
+                {% for item in movie_names %}
+                <option value={{item}}>{{item}}</option>
+                {% endfor %}
+            </select>
+            <i class="fa fa-search"></i>
+            <a data-toggle="tooltip" title="Logout">
+                <img src="https://www.hotstar.com/assets/c724e71754181298e3f835e46ade0517.svg" alt="User logout" width="30px">
+            </a>
+        </div>
+    </nav>
+
+
+    <!-- Recommended for you section -->
+    <div class="carousel-container">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+            </ol>
+
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <a href="movie.html">
+                        <div class="slider">
+                            <div class="slider-content">
+                                <h1 class="movie-title">Movie Title</h1>
+                                <p class="movie-des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore sed commodi vero enim numquam impedit minus, sunt laudantium dolore totam, iure quasi! Tempora, debitis ea vitae quisquam id distinctio autem.</p>
+                            </div>
+                            <img src="/static/images/after.jpg" alt="">
+                        </div>
+                    </a>
+                </div>
+
+                <div class="carousel-item">
+                    <a href="movie.html">
+                        <div class="slider">
+                            <div class="slider-content">
+                                <h1 class="movie-title">Movie Title</h1>
+                                <p class="movie-des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore sed commodi vero enim numquam impedit minus, sunt laudantium dolore totam, iure quasi! Tempora, debitis ea vitae quisquam id distinctio autem.</p>
+                            </div>
+                            <img src="/static/images/after.jpg" alt="">
+                        </div>
+                    </a>
+                </div>
+
+                <div class="carousel-item">
+                    <a href="movie.html">
+                        <div class="slider">
+                            <div class="slider-content">
+                                <h1 class="movie-title">Movie Title</h1>
+                                <p class="movie-des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore sed commodi vero enim numquam impedit minus, sunt laudantium dolore totam, iure quasi! Tempora, debitis ea vitae quisquam id distinctio autem.</p>
+                            </div>
+                            <img src="/static/images/after.jpg" alt="">
+                        </div>
+                    </a>
+                </div>
+
+                <div class="carousel-item">
+                    <a href="movie.html">
+                        <div class="slider">
+                            <div class="slider-content">
+                                <h1 class="movie-title">Movie Title</h1>
+                                <p class="movie-des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore sed commodi vero enim numquam impedit minus, sunt laudantium dolore totam, iure quasi! Tempora, debitis ea vitae quisquam id distinctio autem.</p>
+                            </div>
+                            <img src="/static/images/after.jpg" alt="">
+                        </div>
+                    </a>
+                </div>
+
+                <div class="carousel-item">
+                    <a href="movie.html">
+                        <div class="slider">
+                            <div class="slider-content">
+                                <h1 class="movie-title">Movie Title</h1>
+                                <p class="movie-des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore sed commodi vero enim numquam impedit minus, sunt laudantium dolore totam, iure quasi! Tempora, debitis ea vitae quisquam id distinctio autem.</p>
+                            </div>
+                            <img src="/static/images/after.jpg" alt="">
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+    
+    <!-- Based on Section -->
+    <div class="container-fluid mb-3">
+
+        <div class="row">
+            <h4 class="title">Genre</h4>
+            <select name="genres" id="genres">
+                <option value="comedy">Comedy</option>
+                <option value="horror">Horror</option>
+                <option value="romance">Romance</option>
+                <option value="action">Action</option>
+                <option value="drama">Drama</option>
+            </select>
+        </div>
+
+        <div class="row movie-list">
+            {%for i in range(0, 6)%}
+            <div class="col-6 col-sm-4 col-md-2 movie-card">
+                <a href="/movie/{{genre_movies[i]}}">
+                    <img src={{genre_posters[i]}} class="card-img" alt="">
+                    <p>{{genre_movies[i]}}</p>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="row">
+            <h4 class="title">Best of year </h4>
+            <select name="year" id="year">
+                <option value="2016">2016</option>
+                <option value="2015">2015</option>
+                <option value="2014">2014</option>
+                <option value="2013">2013</option>
+                <option value="2012">2012</option>
+            </select>
+        </div>
+
+        <div class="row movie-list">
+            {%for i in range(0, 6)%}
+            <div class="col-6 col-sm-4 col-md-2 movie-card">
+                <a href="/movie/{{year_movies[i]}}">
+                    <img src={{year_posters[i]}} class="card-img" alt="">
+                    <p>{{year_movies[i]}}</p>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    
+
+    <!-- JS/jQuery files  -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <!-- Select 2 script -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+    <!-- Local JS files  -->
+    <script src="/static/js/script.js"></script>
+
+</body>
+</html>
