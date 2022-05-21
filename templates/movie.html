@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" integrity="undefined" crossorigin="anonymous">
 
     <!-- Local stylesheets  -->
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="../static/css/style.css">
 
     <!-- Select2 stylesheet -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
@@ -25,7 +25,7 @@
     
     <!-- Header -->
     <nav class="navbar">
-        <img src="/static/images/logo.png" class="brand-logo" alt="">
+        <img src="../static/images/logo.png" class="brand-logo" alt="">
         <div class="right-container">
             <select id="movieSelect" class="select2 form-control" onchange="movieSelect()" style="width: 250px;">
                 <option disabled hidden selected value="sm" id="search-movie">Search Movie</option>
@@ -44,7 +44,9 @@
     <!-- Movie Section -->
     <div class="container-fluid">
         <div class="row movie-box">
-            <div class="movie-img col-md-7 d-md-none"></div>
+            <div class="movie-vid col-md-7 d-md-none">
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/{{trailer_key}}?autoplay=1&showinfo=0&controls=0&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>&ndash;&gt;
+            </div>
             <div class="movie-text col-md-5">
                 <div class="d-flex mx-auto">
                     <div class="text-wrapper">
@@ -111,7 +113,7 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 
     <!-- Local JS files  -->
-    <script src="/static/js/script.js"></script>
+    <script src="../static/js/script.js"></script>
 
 </body>
 </html>

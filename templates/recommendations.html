@@ -131,16 +131,18 @@
 
         <div class="row">
             <h4 class="title">Genre</h4>
-            <select name="genres" id="genres">
-                <option value="comedy">Comedy</option>
-                <option value="horror">Horror</option>
-                <option value="romance">Romance</option>
-                <option value="action">Action</option>
-                <option value="drama">Drama</option>
+            <select name="genres" id="genres" onchange="genreSelected()">
+                <option value="Animation">Animation</option>
+                <option value="Family">Family</option>
+                <option value="Comedy">Comedy</option>
+                <option value="Horror">Horror</option>
+                <option value="Romance">Romance</option>
+                <option value="Action">Action</option>
+                <option value="Drama">Drama</option>
             </select>
         </div>
 
-        <div class="row movie-list">
+        <div class="row movie-list" id="genre-row">
             {%for i in range(0, 6)%}
             <div class="col-6 col-sm-4 col-md-2 movie-card">
                 <a href="/movie/{{genre_movies[i]}}">
@@ -153,7 +155,7 @@
 
         <div class="row">
             <h4 class="title">Best of year </h4>
-            <select name="year" id="year">
+            <select name="years" id="years" onchange="javascript:yearSelected()">
                 <option value="2016">2016</option>
                 <option value="2015">2015</option>
                 <option value="2014">2014</option>
@@ -162,7 +164,7 @@
             </select>
         </div>
 
-        <div class="row movie-list">
+        <div class="row movie-list" id="year-row">
             {%for i in range(0, 6)%}
             <div class="col-6 col-sm-4 col-md-2 movie-card">
                 <a href="/movie/{{year_movies[i]}}">
