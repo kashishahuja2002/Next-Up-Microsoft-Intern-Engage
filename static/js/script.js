@@ -62,3 +62,25 @@ function yearSelected() {
         document.getElementById("year-row").innerHTML = htmlContent;
     });
 }
+
+
+
+// Movie Page
+
+var genreLimit = 3;
+$('input.genre-checkbox').on('change', function(evt) {
+    if($('input[name="genres"]:checked').length > genreLimit) {
+        this.checked = false;
+    }
+});
+
+var castLimit = 5;
+$('input.cast-checkbox').on('change', function(evt) {
+    if($('input[name="cast"]:checked').length > castLimit) {
+        this.checked = false;
+    }
+});
+
+// $('input[name="genres"]:checked').each(function() {
+//     console.log(this.value);
+// });

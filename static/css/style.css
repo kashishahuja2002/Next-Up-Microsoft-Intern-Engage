@@ -147,16 +147,11 @@ a {
 
 .text-wrapper {
     padding: 10px 5%;
-}
-
-@media screen and (max-width: 576px) {
-    .text-wrapper h2{
-        font-size: 1.5rem;
-    }
-
-    .text-wrapper h4{
-        font-size: 1rem;
-    }
+    z-index: 2;
+    height: 100%;
+    background: linear-gradient(to right, #030b17 80%, #0c111b00);
+    color: #fff;
+    overflow: hidden;
 }
 
 /* Recommendations Section */
@@ -175,10 +170,17 @@ a {
 
 .movie-card p {
     color: #fff;
-    padding: 10px;
 }
 
 @media screen and (max-width: 576px) {
+    .text-wrapper h2{
+        font-size: 1.5rem;
+    }
+
+    .text-wrapper h4{
+        font-size: 1rem;
+    }
+
     .movie-box {
         margin: 20px;
     }
@@ -191,6 +193,7 @@ a {
         padding-left: 8%;
     }
 }
+
 
 /********* Recommendations Page *********/
 
@@ -286,6 +289,16 @@ a {
     right: -40%;
 }
 
+/* Based on Section */
+select {
+    margin: 0 0 8px 20px;
+    outline: none;
+    background-color: var(--black-body);
+    color: #fff;
+    border: none;
+    border-bottom: 1px solid #fff;
+}
+
 @media screen and (max-width: 576px) {
     .slider-content div {
         position: relative;
@@ -318,18 +331,104 @@ a {
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
-        padding: 0!important;
-        padding-top: 5px!important;
+        padding: 0;
+        padding-top: 5px;
         margin-bottom: 20px;
     }
 }
 
-/* Based on Section */
-select {
-    margin: 0 0 8px 20px;
-    outline: none;
-    background-color: var(--black-body);
+
+/********* Choices Page **********/
+
+.select-heading {
     color: #fff;
-    border: none;
-    border-bottom: 1px solid #fff;
+}
+
+.select-list {
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    max-height: 410px;
+    overflow-y: auto;
+    margin-bottom: 60px;
+    box-shadow: -2px -2px 5px var(--cyan),
+                3px 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+.select-list li {
+    list-style: none;
+    text-align: center;
+    margin: 15px 0px;
+}
+
+.select-list li label {
+    cursor: pointer;
+}
+
+.select-list li input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+}
+
+.select-list li :checked ~ .select-box {
+    box-shadow: -2px -2px 5px rgba(255, 255, 255, 1),
+    3px 3px 5px rgba(0, 0, 0, 0.1), inset -2px -2px 5px rgba(255, 255, 255, 1),
+        inset 3px 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+.select-list li .select-name {
+    transform: scale(0.95);
+    margin-bottom: 0;
+}
+
+.select-list li .select-box {
+    padding: 20px;
+    border: 1px solid rgb(70, 70, 70);
+    border-radius: 10px;
+}
+
+.select-list li .select-box .select-name {
+    font-size: 30px;
+    color: var(--cyan);
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px var(--white); 
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: transparent;
+    box-shadow: inset 0 0 7px var(--cyan);
+    border-radius: 10px;
+}
+
+.select-submit {
+    background-color: transparent;
+    color: var(--cyan);
+    padding: 20px;
+    border: 1px solid var(--white);
+    cursor: pointer;
+    font-size: 22px;
+    border-radius: 10px;
+    display: block;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+@media screen and (max-width: 576px) {
+    .select-list li .select-box {
+        padding: 5px;
+    }
+
+    .select-heading h2{
+        font-size: 22px;
+    }
 }

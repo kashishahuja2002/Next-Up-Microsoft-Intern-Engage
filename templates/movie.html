@@ -11,14 +11,12 @@
 
     <!-- font-awesome -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" integrity="undefined" crossorigin="anonymous">
-
-    <!-- Local stylesheets  -->
-    <link rel="stylesheet" href="../static/css/style.css">
 
     <!-- Select2 stylesheet -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+
+    <!-- Local stylesheets  -->
+    <link rel="stylesheet" href="../static/css/style.css">
 
 </head>
 <body>
@@ -44,10 +42,10 @@
     <!-- Movie Section -->
     <div class="container-fluid">
         <div class="row movie-box">
-            <div class="movie-vid col-md-7 d-md-none">
+            <div class="movie-vid col-md-8 d-md-none">
                 <iframe width="100%" height="100%" src="https://www.youtube.com/embed/{{trailer_key}}?autoplay=1&showinfo=0&controls=0&mute=1&playlist={{trailer_key}}&loop=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
-            <div class="movie-text col-md-5">
+            <div class="movie-text col-md-4">
                 <div class="d-flex mx-auto">
                     <div class="text-wrapper">
                         <h2>{{movies.iloc[movie_idx].title}}</h2>
@@ -73,7 +71,7 @@
                     </div>
                 </div>
             </div>
-            <div class="movie-vid col-md-7 d-none d-md-block">
+            <div class="movie-vid col-md-8 d-none d-md-block">
                 <!-- 5PSNL1qE6VY -->
                 <iframe width="100%" height="100%" src="https://www.youtube.com/embed/{{trailer_key}}?autoplay=1&showinfo=0&controls=0&mute=1&playlist={{trailer_key}}&loop=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
