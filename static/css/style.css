@@ -133,11 +133,6 @@ a {
     background-position: 100%;
     background-size: cover;
     border-radius: 1%;
-    /* background-image: url(https://noamkroll.com/wp-content/uploads/2019/02/Why-Amazon-Prime-Could-Be-The-Best-Platform-To-Release-An-Independent-Feature-Film.jpg); */
-    /* background: url(/static/images/uncharted.jpg); */
-    /* box-shadow: inset 15vw -11px 72px 31px rgb(12 17 27 / 80%);
-    -webkit-box-shadow: 15vw -11px 72px 31px rgb(12 17 27 / 80%) inset;
-    -moz-box-shadow: 15vw -11px 72px 31px rgba(12,17,27,.80) inset; */
     box-shadow: inset 15vw -11px 72px 31px rgb(0 0 0 / 80%);
     -webkit-box-shadow: 15vw -11px 72px 31px rgb(0 0 0 / 80%) inset;
     -moz-box-shadow: 15vw -11px 72px 31px rgba(0,0,0,.80) inset;
@@ -152,6 +147,16 @@ a {
 
 .text-wrapper {
     padding: 10px 5%;
+}
+
+@media screen and (max-width: 576px) {
+    .text-wrapper h2{
+        font-size: 1.5rem;
+    }
+
+    .text-wrapper h4{
+        font-size: 1rem;
+    }
 }
 
 /* Recommendations Section */
@@ -173,6 +178,19 @@ a {
     padding: 10px;
 }
 
+@media screen and (max-width: 576px) {
+    .movie-box {
+        margin: 20px;
+    }
+
+    .movie-list {
+        padding: 20px 20px;
+    }
+
+    .title {
+        padding-left: 8%;
+    }
+}
 
 /********* Recommendations Page *********/
 
@@ -223,6 +241,7 @@ a {
     height: 100%;
     background: linear-gradient(to right, #030b17 80%, #0c111b00);
     color: #fff;
+    overflow: hidden;
 }
 
 .movie-title {
@@ -237,6 +256,16 @@ a {
     padding-left: 50px;
     margin-top: 30px;
     opacity: 0.8;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space:initial;
+    display: -webkit-box;
+    -webkit-line-clamp: 10;
+    -webkit-box-orient: vertical;
+}
+
+.carousel-item {
+    height: 100%;
 }
 
 .carousel-control-prev, .carousel-control-next {
@@ -258,6 +287,11 @@ a {
 }
 
 @media screen and (max-width: 576px) {
+    .slider-content div {
+        position: relative;
+        top: 20%;
+    }
+
     .movie-title {
         margin-top: 30px;
         font-size: 20px;
@@ -269,6 +303,24 @@ a {
         padding-left: 20px;
         margin-top: 20px;
         font-size: 12px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space:initial;
+        display: -webkit-box;
+        -webkit-line-clamp: 10;
+        -webkit-box-orient: vertical;
+    }
+
+    .text-contain {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space:initial;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        padding: 0!important;
+        padding-top: 5px!important;
+        margin-bottom: 20px;
     }
 }
 

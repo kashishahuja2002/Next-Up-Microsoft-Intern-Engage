@@ -68,7 +68,7 @@
                         <small>{{movies.iloc[movie_idx].release_date}}</small> <br><br>
                         {% endif %}
                         {% if movies.iloc[movie_idx].overview: %}
-                        <p>{{movies.iloc[movie_idx].overview}}</p>
+                        <p class="text-contain">{{movies.iloc[movie_idx].overview}}</p>
                         {% endif %}
                     </div>
                 </div>
@@ -93,7 +93,7 @@
             <div class="col-6 col-sm-4 col-md-2 movie-card">
                 <a href="{{recommendations[i]}}">
                     <img src={{posters[i]}} class="card-img" alt="">
-                    <p>{{recommendations[i]}}</p>
+                    <p class="text-contain">{{recommendations[i]}}</p>
                 </a>
             </div>
             {% endfor %}

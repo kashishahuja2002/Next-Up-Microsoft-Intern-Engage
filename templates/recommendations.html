@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" integrity="undefined" crossorigin="anonymous">
 
     <!-- Local stylesheets  -->
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="../static/css/style.css">
 
     <!-- Select2 stylesheet -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
@@ -25,9 +25,9 @@
 
     <!-- Header -->
     <nav class="navbar">
-        <img src="/static/images/logo.png" class="brand-logo" alt="">
+        <img src="../static/images/logo.png" class="brand-logo" alt="">
         <div class="right-container">
-            <select id="movieSelect" class="select2 form-control" onchange="movieSelect()" style="width: 250px;">
+            <select id="movieSelect" class="select2 form-control" onchange="movieSelect()" style="width: 220px;">
                 <option disabled hidden selected value="sm" id="search-movie">Search Movie</option>
                 {% for item in movie_names %}
                 <option value={{item}}>{{item}}</option>
@@ -48,70 +48,42 @@
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
             </ol>
 
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <a href="movie.html">
+                    <a href="/movie/{{movies.iloc[choice_idx[0]].title}}">
                         <div class="slider">
                             <div class="slider-content">
-                                <h1 class="movie-title">Movie Title</h1>
-                                <p class="movie-des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore sed commodi vero enim numquam impedit minus, sunt laudantium dolore totam, iure quasi! Tempora, debitis ea vitae quisquam id distinctio autem.</p>
+                                <div>
+                                    <h1 class="movie-title">{{movies.iloc[choice_idx[0]].title}}</h1>
+                                    {% if movies.iloc[choice_idx[0]].overview: %}
+                                    <p class="movie-des">{{movies.iloc[choice_idx[0]].overview}}</p>
+                                    {% endif %}
+                                </div>
                             </div>
-                            <img src="/static/images/after.jpg" alt="">
+                            <img src={{choice_posters[0]}} alt="">
                         </div>
                     </a>
                 </div>
 
+                {%for i in range(1, 3)%}
                 <div class="carousel-item">
                     <a href="movie.html">
-                        <div class="slider">
+                         <div class="slider">
                             <div class="slider-content">
-                                <h1 class="movie-title">Movie Title</h1>
-                                <p class="movie-des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore sed commodi vero enim numquam impedit minus, sunt laudantium dolore totam, iure quasi! Tempora, debitis ea vitae quisquam id distinctio autem.</p>
+                                <div>
+                                    <h1 class="movie-title">{{movies.iloc[choice_idx[i]].title}}</h1>
+                                    {% if movies.iloc[choice_idx[i]].overview: %}
+                                    <p class="movie-des">{{movies.iloc[choice_idx[i]].overview}}</p>
+                                    {% endif %}
+                                </div>
                             </div>
-                            <img src="/static/images/after.jpg" alt="">
+                            <img src={{choice_posters[i]}} alt="">
                         </div>
                     </a>
                 </div>
-
-                <div class="carousel-item">
-                    <a href="movie.html">
-                        <div class="slider">
-                            <div class="slider-content">
-                                <h1 class="movie-title">Movie Title</h1>
-                                <p class="movie-des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore sed commodi vero enim numquam impedit minus, sunt laudantium dolore totam, iure quasi! Tempora, debitis ea vitae quisquam id distinctio autem.</p>
-                            </div>
-                            <img src="/static/images/after.jpg" alt="">
-                        </div>
-                    </a>
-                </div>
-
-                <div class="carousel-item">
-                    <a href="movie.html">
-                        <div class="slider">
-                            <div class="slider-content">
-                                <h1 class="movie-title">Movie Title</h1>
-                                <p class="movie-des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore sed commodi vero enim numquam impedit minus, sunt laudantium dolore totam, iure quasi! Tempora, debitis ea vitae quisquam id distinctio autem.</p>
-                            </div>
-                            <img src="/static/images/after.jpg" alt="">
-                        </div>
-                    </a>
-                </div>
-
-                <div class="carousel-item">
-                    <a href="movie.html">
-                        <div class="slider">
-                            <div class="slider-content">
-                                <h1 class="movie-title">Movie Title</h1>
-                                <p class="movie-des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore sed commodi vero enim numquam impedit minus, sunt laudantium dolore totam, iure quasi! Tempora, debitis ea vitae quisquam id distinctio autem.</p>
-                            </div>
-                            <img src="/static/images/after.jpg" alt="">
-                        </div>
-                    </a>
-                </div>
+                {% endfor %}
             </div>
 
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -132,12 +104,12 @@
         <div class="row">
             <h4 class="title">Genre</h4>
             <select name="genres" id="genres" onchange="genreSelected()">
-                <option value="Animation">Animation</option>
+                <option value="Action">Action</option>
                 <option value="Family">Family</option>
                 <option value="Comedy">Comedy</option>
                 <option value="Horror">Horror</option>
                 <option value="Romance">Romance</option>
-                <option value="Action">Action</option>
+                <option value="Animation">Animation</option>
                 <option value="Drama">Drama</option>
             </select>
         </div>
@@ -147,7 +119,7 @@
             <div class="col-6 col-sm-4 col-md-2 movie-card">
                 <a href="/movie/{{genre_movies[i]}}">
                     <img src={{genre_posters[i]}} class="card-img" alt="">
-                    <p>{{genre_movies[i]}}</p>
+                    <p class="text-contain">{{genre_movies[i]}}</p>
                 </a>
             </div>
             {% endfor %}
@@ -169,7 +141,7 @@
             <div class="col-6 col-sm-4 col-md-2 movie-card">
                 <a href="/movie/{{year_movies[i]}}">
                     <img src={{year_posters[i]}} class="card-img" alt="">
-                    <p>{{year_movies[i]}}</p>
+                    <p class="text-contain">{{year_movies[i]}}</p>
                 </a>
             </div>
             {% endfor %}
@@ -189,7 +161,7 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 
     <!-- Local JS files  -->
-    <script src="/static/js/script.js"></script>
+    <script src="../static/js/script.js"></script>
 
 </body>
 </html>

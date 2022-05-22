@@ -21,7 +21,7 @@ function movieSelect()
 
 //Movie Slider carousel
 $('.carousel').carousel({
-    interval: 5000,
+    interval: 500000,
     keyboard: true
 })
 
