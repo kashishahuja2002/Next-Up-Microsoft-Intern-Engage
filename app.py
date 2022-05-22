@@ -15,8 +15,50 @@ movies = pd.DataFrame(dataset)
 
 similarity = pickle.load(open('./model/data/similarity.pkl', 'rb'))
 popular = pickle.load(open('./model/data/popular.pkl', 'rb'))
+select = pickle.load(open('./model/data/select.pkl', 'rb'))
 
 movie_names = movies['title'].values
+
+
+def byChoice(genres, castList, obj):
+    choice = obj.copy()
+
+    def byChoiceGenre():
+        gen_fre = []
+        for row in choice.iterrows():
+            genFre = 0
+            for gen in row[1].genres:
+                if gen == genres[0] or gen == genres[1] or gen == genres[2]:
+                    genFre += 1
+            gen_fre.append(genFre)
+        return gen_fre
+
+    choice['gen_fre'] = byChoiceGenre()
+    choice = choice[choice['gen_fre'] != 0]
+
+    def byChoiceCast():
+        cast_fre = []
+        for row in choice.iterrows():
+            castFre = 0
+            for cast in row[1].cast:
+                if cast == castList[0] or cast == castList[1] or cast == castList[2] or cast == castList[3] or cast == \
+                        castList[4] or cast == castList[5]:
+                    castFre += 1
+            cast_fre.append(castFre)
+        return cast_fre
+
+    choice['cast_fre'] = byChoiceCast()
+    choice = choice[choice['cast_fre'] != 0]
+
+    choice_movies = []
+    counter = 0
+    for mov in choice.iterrows():
+        if counter != 3:
+            choice_movies.append(mov[1].title)
+            counter += 1
+        else:
+            break
+    return choice_movies
 
 
 def fetchTrailer(movie_id):
@@ -34,7 +76,8 @@ def fetchPoster(movie_id):
         'https://api.themoviedb.org/3/movie/{}?api_key=65669b357e1045d543ba072f7f533bce&language=en-US'.format(
             movie_id))
     data = response.json()
-    return "https://image.tmdb.org/t/p/w185" + str(data['poster_path'])
+    return "https://image.tmdb.org/t/p/original" + str(data['poster_path'])
+
 
 @app.route('/movie/<movie_name>')
 def movie(movie_name):
@@ -83,6 +126,7 @@ def byGenre(genre):
 
     return genre_movies, genre_posters
 
+
 def byYear(year):
     counter = 0
     year_movies = []
@@ -102,6 +146,7 @@ def byYear(year):
 
     return year_movies, year_posters
 
+
 @app.route('/getByGenre', methods=['GET','POST'])
 def getByGenre():
     genre = request.form["genre"]
@@ -110,6 +155,7 @@ def getByGenre():
         {"genre_movies": genre_movies}, {"genre_posters": genre_poster}
     )
     return response
+
 
 @app.route('/getByYear', methods=['GET','POST'])
 def getByYear():
@@ -120,15 +166,34 @@ def getByYear():
     )
     return response
 
+
 @app.route('/recommendations')
 def recommendations():
-    genre_movies, genre_posters = byGenre("Animation")
+    genre_movies, genre_posters = byGenre("Action")
     year_movies, year_posters = byYear("2016")
-    return render_template("recommendations.html", movie_names=movie_names, genre_movies=genre_movies, year_movies=year_movies, genre_posters=genre_posters, year_posters=year_posters)
+    genres = ["Drama", "Documentory", "Horror"]
+    castList = ["Sandra Bullock", "Jessica Chastain", "Ryan Reynolds", "Zoe Saldana", "Chris Pratt","Lisa Hart Carroll"]
+    choice_movies = byChoice(genres,castList,select)
+    choice_idx = []
+    choice_posters=[]
+    for mov in choice_movies:
+        movie_idx = movies[movies['title'] == mov].index[0]
+        choice_idx.append(movie_idx)
+        movie_id = movies.iloc[movie_idx].movie_id
+        choice_posters.append(fetchPoster(movie_id))
+    return render_template("recommendations.html", movie_names=movie_names, genre_movies=genre_movies, year_movies=year_movies, genre_posters=genre_posters, year_posters=year_posters, choice_idx=choice_idx, movies=movies, choice_posters=choice_posters)
+
 
 if __name__ == "__main__":
     app.run()
 
+
+# movie_ids = movies['movie_id'].values
+# for i in movie_ids:
+#     print(fetchTrailer(i))
+# for x in range(2638, len(movie_ids)):
+#     movie_id = movies.iloc[x].movie_id
+    # print(fetchPoster(movie_id))
 
 
 
