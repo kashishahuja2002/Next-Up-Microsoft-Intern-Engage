@@ -27,7 +27,7 @@
     <nav class="navbar">
         <img src="../static/images/logo.png" class="brand-logo" alt="">
         <div class="right-container">
-            <select id="movieSelect" class="select2 form-control" onchange="movieSelect()" style="width: 250px;">
+            <select id="movieSelect" class="select2 form-control" onchange="movieSelect()" style="width: 220px;">
                 <option disabled hidden selected value="sm" id="search-movie">Search Movie</option>
                 {% for item in movie_names %}
                 <option value={{item}}>{{item}}</option>
@@ -45,7 +45,7 @@
     <div class="container-fluid">
         <div class="row movie-box">
             <div class="movie-vid col-md-7 d-md-none">
-                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/{{trailer_key}}?autoplay=1&showinfo=0&controls=0&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>&ndash;&gt;
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/{{trailer_key}}?autoplay=1&showinfo=0&controls=0&mute=1&playlist={{trailer_key}}&loop=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
             <div class="movie-text col-md-5">
                 <div class="d-flex mx-auto">
@@ -75,7 +75,7 @@
             </div>
             <div class="movie-vid col-md-7 d-none d-md-block">
                 <!-- 5PSNL1qE6VY -->
-                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/{{trailer_key}}?autoplay=1&showinfo=0&controls=0&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/{{trailer_key}}?autoplay=1&showinfo=0&controls=0&mute=1&playlist={{trailer_key}}&loop=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
     </div>
