@@ -47,7 +47,7 @@ a:hover {
     border-radius: 0px!important;
     text-transform: capitalize;
     font-size: 16px;
-    font-weight: 500; 
+    font-weight: 500;
 }
 
 .select2-container--default .select2-selection--single .select2-selection__rendered {
@@ -109,7 +109,7 @@ a {
     .search-box:focus {
         width: 250px;
     }
-} 
+}
 
 
 /********* Movie Page **********/
@@ -118,7 +118,7 @@ a {
 .movie-box {
     color: #fff;
     min-height: 60vh;
-    margin: 50px; 
+    margin: 50px;
     margin-top: 0px;
     border-radius: 1%;
     background-color: #030B17;
@@ -245,7 +245,7 @@ a {
 
 .carousel-container:hover .carousel-control-prev, .carousel-container:hover .carousel-control-next {
     visibility: visible;
-} 
+}
 
 .carousel-control-prev-icon {
     position: relative;

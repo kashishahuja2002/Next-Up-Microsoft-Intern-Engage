@@ -22,7 +22,7 @@
 
 </head>
 <body>
-    
+
     <!-- Header -->
     <nav class="navbar">
         <img src="../static/images/logo.png" class="brand-logo" alt="">
@@ -90,7 +90,7 @@
 
         <div class="row movie-list">
             {%for i in range(0, 6)%}
-            <div class="col-6 col-sm-4 col-md-2 movie-card"> 
+            <div class="col-6 col-sm-4 col-md-2 movie-card">
                 <a href="{{recommendations[i]}}">
                     <img src={{posters[i]}} class="card-img" alt="">
                     <p>{{recommendations[i]}}</p>

@@ -19,7 +19,7 @@ function movieSelect()
 
 // Recommendations Page
 
-// Movie Slider carousel
+//Movie Slider carousel
 $('.carousel').carousel({
     interval: 5000,
     keyboard: true
@@ -38,7 +38,7 @@ function genreSelected()
         console.log(data, status);
         var htmlContent="";
         for(var i=0; i<data[0].genre_movies.length; i++) {
-            htmlContent = htmlContent + "<div class='col-6 col-sm-4 col-md-2 movie-card'><a href='/movie/'"+data[0].genre_movies[i]+"><p>"+data[0].genre_movies[i]+"</p></a></div>";
+            htmlContent = htmlContent + "<div class='col-6 col-sm-4 col-md-2 movie-card'><a href='/movie/'"+data[0].genre_movies[i]+"><img src='"+data[1].genre_posters[i]+"' alt='' style='width: 100%;height: auto;'><p>"+data[0].genre_movies[i]+"</p></a></div>";
         }
         document.getElementById("genre-row").innerHTML = htmlContent;
     });
@@ -57,7 +57,7 @@ function yearSelected() {
         console.log(data, status);
         var htmlContent="";
         for(var i=0; i<data[0].year_movies.length; i++) {
-            htmlContent = htmlContent + "<div class='col-6 col-sm-4 col-md-2 movie-card'><a href='/movie/'"+data[0].year_movies[i]+"><p>"+data[0].year_movies[i]+"</p></a></div>";
+            htmlContent = htmlContent + "<div class='col-6 col-sm-4 col-md-2 movie-card'><a href='/movie/'"+data[0].year_movies[i]+"><img src='"+data[1].year_posters[i]+"' alt='' style='width: 100%;height: auto;'><p>"+data[0].year_movies[i]+"</p></a></div>";
         }
         document.getElementById("year-row").innerHTML = htmlContent;
     });
