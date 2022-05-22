@@ -189,11 +189,12 @@ if __name__ == "__main__":
 
 
 # movie_ids = movies['movie_id'].values
-# for i in movie_ids:
-#     print(fetchTrailer(i))
-# for x in range(2638, len(movie_ids)):
+# for x in range(1, 100):
 #     movie_id = movies.iloc[x].movie_id
-    # print(fetchPoster(movie_id))
+#     print(fetchPoster(movie_id))
+
+    # for i in movie_ids:
+    #     print(fetchPoster(i))
 
 
 
