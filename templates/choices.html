@@ -28,7 +28,7 @@
 
     <!-- Select Section -->
     <div class="container">
-        <form action="">
+        <form action="/recommendations" method="POST">
             <div class="select-heading">
                 <h2>Select your top 3 Genres</h2>
             </div>
@@ -38,7 +38,7 @@
                     <div class="col">
                         <li>
                             <label>
-                            <input type="checkbox" class="genre-checkbox" name="genres" value={{genre_names[i]}}>
+                            <input type="checkbox" class="genre-checkbox" name="genre-checkbox" value={{"-".join(i.split())}}>
                             <div class="select-box">
                                 <p class="select-name" style="-webkit-line-clamp: 1;"> {{i}} </p>
                             </div>
@@ -58,7 +58,7 @@
                     <div class="col">
                         <li>
                             <label>
-                            <input type="checkbox" class="cast-checkbox" name="cast" value={{cast_names[i]}}>
+                            <input type="checkbox" class="cast-checkbox" name="cast-checkbox" value={{"-".join(i.split())}}>
                             <div class="select-box">
                                 <p class="select-name" style="-webkit-line-clamp: 2;">{{i}}</p>
                             </div>

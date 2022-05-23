@@ -69,14 +69,14 @@ function yearSelected() {
 
 var genreLimit = 3;
 $('input.genre-checkbox').on('change', function(evt) {
-    if($('input[name="genres"]:checked').length > genreLimit) {
+    if($('input[name="genre-checkbox"]:checked').length > genreLimit) {
         this.checked = false;
     }
 });
 
 var castLimit = 5;
 $('input.cast-checkbox').on('change', function(evt) {
-    if($('input[name="cast"]:checked').length > castLimit) {
+    if($('input[name="cast-checkbox"]:checked').length > castLimit) {
         this.checked = false;
     }
 });
