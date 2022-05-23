@@ -23,6 +23,20 @@ movie_names = movies['title'].values
 def byChoice(genres, castList, obj):
     choice = obj.copy()
 
+    def byChoiceCast():
+        cast_fre = []
+        for row in choice.iterrows():
+            castFre = 0
+            for cast in row[1].cast:
+                if cast == castList[0] or cast == castList[1] or cast == castList[2] or cast == castList[3] or cast == \
+                        castList[4]:
+                    castFre += 1
+            cast_fre.append(castFre)
+        return cast_fre
+
+    choice['cast_fre'] = byChoiceCast()
+    choice = choice[choice['cast_fre'] != 0]
+
     def byChoiceGenre():
         gen_fre = []
         for row in choice.iterrows():
@@ -35,20 +49,6 @@ def byChoice(genres, castList, obj):
 
     choice['gen_fre'] = byChoiceGenre()
     choice = choice[choice['gen_fre'] != 0]
-
-    def byChoiceCast():
-        cast_fre = []
-        for row in choice.iterrows():
-            castFre = 0
-            for cast in row[1].cast:
-                if cast == castList[0] or cast == castList[1] or cast == castList[2] or cast == castList[3] or cast == \
-                        castList[4] or cast == castList[5]:
-                    castFre += 1
-            cast_fre.append(castFre)
-        return cast_fre
-
-    choice['cast_fre'] = byChoiceCast()
-    choice = choice[choice['cast_fre'] != 0]
 
     choice_movies = []
     counter = 0
@@ -72,11 +72,9 @@ def fetchTrailer(movie_id):
 
 
 def fetchPoster(movie_id):
-    response = requests.get(
-        'https://api.themoviedb.org/3/movie/{}?api_key=65669b357e1045d543ba072f7f533bce&language=en-US'.format(
-            movie_id))
-    data = response.json()
-    return "https://image.tmdb.org/t/p/original" + str(data['poster_path'])
+    movie_index = movies[movies['movie_id'] == movie_id].index[0]
+    poster = movies.iloc[movie_index].poster_path
+    return poster
 
 
 @app.route('/movie/<movie_name>')
@@ -172,7 +170,7 @@ def recommendations():
     genre_movies, genre_posters = byGenre("Action")
     year_movies, year_posters = byYear("2016")
     genres = ["Drama", "Documentory", "Horror"]
-    castList = ["Sandra Bullock", "Jessica Chastain", "Ryan Reynolds", "Zoe Saldana", "Chris Pratt","Lisa Hart Carroll"]
+    castList = ["Sandra Bullock", "Jessica Chastain", "Ryan Reynolds", "Zoe Saldana", "Chris Pratt"]
     choice_movies = byChoice(genres,castList,select)
     choice_idx = []
     choice_posters=[]
@@ -186,7 +184,6 @@ def recommendations():
 
 if __name__ == "__main__":
     app.run()
-
 
 # movie_ids = movies['movie_id'].values
 # for x in range(1, 100):
