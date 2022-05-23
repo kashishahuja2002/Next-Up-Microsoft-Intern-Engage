@@ -7,6 +7,7 @@ import flask
 import ast
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS, cross_origin
+import operator
 
 app = Flask(__name__)
 
@@ -18,6 +19,29 @@ popular = pickle.load(open('./model/data/popular.pkl', 'rb'))
 select = pickle.load(open('./model/data/select.pkl', 'rb'))
 
 movie_names = movies['title'].values
+
+genre_names=[]
+for i in movies['genres']:
+    for gen in i:
+        if gen not in genre_names:
+            genre_names.append(gen)
+
+cast_dict = {}
+for row in movies.iterrows():
+    for cast in row[1].cast:
+        if cast in cast_dict:
+            cast_dict[cast] = (cast_dict[cast] + 1)
+        else:
+            cast_dict[cast] = 0
+cast_dict = dict(sorted(cast_dict.items(), key=operator.itemgetter(1), reverse=True))
+cast_names = []
+counter = 0
+for key in cast_dict:
+    if counter < 25:
+        cast_names.append(key)
+        counter+=1
+    else:
+        break;
 
 
 def byChoice(genres, castList, obj):
@@ -50,6 +74,8 @@ def byChoice(genres, castList, obj):
     choice['gen_fre'] = byChoiceGenre()
     choice = choice[choice['gen_fre'] != 0]
 
+    choice = choice.sort_values('cast_fre', ascending=False)
+
     choice_movies = []
     counter = 0
     for mov in choice.iterrows():
@@ -59,6 +85,11 @@ def byChoice(genres, castList, obj):
         else:
             break
     return choice_movies
+
+
+@app.route('/choices')
+def choices():
+    return render_template("choices.html", genre_names=genre_names, cast_names=cast_names)
 
 
 def fetchTrailer(movie_id):
@@ -148,9 +179,9 @@ def byYear(year):
 @app.route('/getByGenre', methods=['GET','POST'])
 def getByGenre():
     genre = request.form["genre"]
-    genre_movies, genre_poster = byGenre(genre)
+    genre_movies, genre_posters = byGenre(genre)
     response = jsonify(
-        {"genre_movies": genre_movies}, {"genre_posters": genre_poster}
+        {"genre_movies": genre_movies}, {"genre_posters": genre_posters}
     )
     return response
 
@@ -158,9 +189,9 @@ def getByGenre():
 @app.route('/getByYear', methods=['GET','POST'])
 def getByYear():
     year = request.form["year"]
-    year_movies, year_poster = byYear(year)
+    year_movies, year_posters = byYear(year)
     response = jsonify(
-        {"year_movies": year_movies}, {"year_posters": year_poster}
+        {"year_movies": year_movies}, {"year_posters": year_posters}
     )
     return response
 
@@ -169,8 +200,8 @@ def getByYear():
 def recommendations():
     genre_movies, genre_posters = byGenre("Action")
     year_movies, year_posters = byYear("2016")
-    genres = ["Drama", "Documentory", "Horror"]
-    castList = ["Sandra Bullock", "Jessica Chastain", "Ryan Reynolds", "Zoe Saldana", "Chris Pratt"]
+    genres = ["Comedy", "Action", "Animation"]
+    castList = ["Robert De Niro", "Samuel L. Jackson", "Bruce Willis", "Matt Damon", "Nicolas Cage"]
     choice_movies = byChoice(genres,castList,select)
     choice_idx = []
     choice_posters=[]
