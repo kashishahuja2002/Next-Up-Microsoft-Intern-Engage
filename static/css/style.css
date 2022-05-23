@@ -115,6 +115,7 @@ a {
     content: "";
     background: url(../images/background.jpg) no-repeat center center/cover;
     position: absolute;
+    min-height: 100%;
     height: 100vh;
     width: 100%;
     opacity: 0.2;
@@ -198,6 +199,7 @@ a {
     .content {
         margin: 50px 0;
         margin-bottom: 10px;
+        padding-top: 20px;
     }
 
     .content h1, h3 {
@@ -214,6 +216,85 @@ a {
 }
 
 
+/********* Sign-up Page && Sign-in Page **********/
+.login-right .login-form .login-div{
+    margin: auto;
+    width: 30%;
+    border: none;
+    border-radius: 5px;
+    background: rgba(0,0,0,.5);
+    padding: 60px 70px;
+}
+
+.login-form input, .login-form button{
+    margin-left: 0!important;
+    margin-right: 0!important;
+}
+
+.login-right .login-form form input[type=password], .login-right .login-form form input[type=text], .login-right .login-form form input[type=email] {
+    border-radius: 3px;
+    width: 100%;
+    border: 1px solid #eee;
+    margin: 5px;
+    font-size: 14px;
+    box-shadow: none;
+    padding: 4px 8px;
+}
+
+.login-right .login-form .btnlogin {
+    width: 100%;
+    margin: 10px 5px 5px;
+    font-size: 16px;
+    background-color: var(--cyan);
+    color: #000;
+}
+
+.login-right .login-form .forgot {
+    display: inline-block;
+    font-size: 12px;
+    float: right;
+    text-decoration: none;
+    color: #aaa;
+    outline: 0;
+    margin: 5px 0;
+}
+
+@media screen and (max-width: 1200px) {
+    .login-right .login-form .login-div {
+        width: 40%;
+        padding: 60px 50px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .login-right .login-form .login-div {
+        width: 50%;
+        padding: 60px 50px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .login-right .login-form .login-div {
+        width: 60%;
+        padding: 60px 40px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .login-right .login-form .login-div {
+        width: 70%;
+        padding: 60px 30px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .login-right .login-form .login-div {
+        width: 90%;
+        padding: 60px 30px;
+    }
+}
+
+
 /********* Movie Page **********/
 
 /* Movie Section */
@@ -224,7 +305,6 @@ a {
     margin-top: 0px;
     border-radius: 1%;
     background-color: #030B17;
-    /* background-color: #000; */
 }
 
 .movie-vid {
