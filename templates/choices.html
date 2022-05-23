@@ -34,46 +34,18 @@
             </div>
             <div class="row">
                 <ul class="select-list">
+                    {% for i in genre_names %}
                     <div class="col">
                         <li>
                             <label>
-                            <input type="checkbox" class="genre-checkbox" name="genres" value="">
+                            <input type="checkbox" class="genre-checkbox" name="genres" value={{genre_names[i]}}>
                             <div class="select-box">
-                                <p class="select-name">Genre</p>
+                                <p class="select-name" style="-webkit-line-clamp: 1;"> {{i}} </p>
                             </div>
                             </label>
                         </li>
                     </div>
-                    <div class="col">
-                        <li>
-                            <label>
-                            <input type="checkbox" class="genre-checkbox" name="genres" value="">
-                            <div class="select-box">
-                                <p class="select-name">Genre</p>
-                            </div>
-                            </label>
-                        </li>
-                    </div>
-                    <div class="col">
-                        <li>
-                            <label>
-                            <input type="checkbox" class="genre-checkbox" name="genres" value="">
-                            <div class="select-box">
-                                <p class="select-name">Genre</p>
-                            </div>
-                            </label>
-                        </li>
-                    </div>
-                    <div class="col">
-                        <li>
-                            <label>
-                            <input type="checkbox" class="genre-checkbox" name="genres" value="">
-                            <div class="select-box">
-                                <p class="select-name">Genre</p>
-                            </div>
-                            </label>
-                        </li>
-                    </div>
+                    {% endfor %}
                 </ul>
             </div>
 
@@ -82,46 +54,18 @@
             </div>
             <div class="row">
                 <ul class="select-list">
+                    {% for i in cast_names %}
                     <div class="col">
                         <li>
                             <label>
-                            <input type="checkbox" class="cast-checkbox" name="cast" value="">
+                            <input type="checkbox" class="cast-checkbox" name="cast" value={{cast_names[i]}}>
                             <div class="select-box">
-                                <p class="select-name">Actor</p>
+                                <p class="select-name" style="-webkit-line-clamp: 2;">{{i}}</p>
                             </div>
                             </label>
                         </li>
                     </div>
-                    <div class="col">
-                        <li>
-                            <label>
-                            <input type="checkbox" class="cast-checkbox" name="cast" value="">
-                            <div class="select-box">
-                                <p class="select-name">Actor</p>
-                            </div>
-                            </label>
-                        </li>
-                    </div>
-                    <div class="col">
-                        <li>
-                            <label>
-                            <input type="checkbox" class="cast-checkbox" name="cast" value="">
-                            <div class="select-box">
-                                <p class="select-name">Actor</p>
-                            </div>
-                            </label>
-                        </li>
-                    </div>
-                    <div class="col">
-                        <li>
-                            <label>
-                            <input type="checkbox" class="cast-checkbox" name="cast" value="">
-                            <div class="select-box">
-                                <p class="select-name">Actor</p>
-                            </div>
-                            </label>
-                        </li>
-                    </div>
+                    {% endfor %}
                 </ul>
             </div>
             <input type="submit" class="select-submit" value="Done">
