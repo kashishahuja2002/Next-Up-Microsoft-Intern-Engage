@@ -52,9 +52,9 @@ def byChoice(genres, castList, obj):
         for row in choice.iterrows():
             castFre = 0
             for cast in row[1].cast:
-                if cast == castList[0] or cast == castList[1] or cast == castList[2] or cast == castList[3] or cast == \
-                        castList[4]:
-                    castFre += 1
+                for item in castList:
+                    if cast == item:
+                        castFre += 1
             cast_fre.append(castFre)
         return cast_fre
 
@@ -66,8 +66,9 @@ def byChoice(genres, castList, obj):
         for row in choice.iterrows():
             genFre = 0
             for gen in row[1].genres:
-                if gen == genres[0] or gen == genres[1] or gen == genres[2]:
-                    genFre += 1
+                for item in genres:
+                    if gen == item:
+                        genFre += 1
             gen_fre.append(genFre)
         return gen_fre
 
@@ -196,13 +197,19 @@ def getByYear():
     return response
 
 
-@app.route('/recommendations')
+@app.route('/recommendations', methods=['POST', 'GET'])
 def recommendations():
     genre_movies, genre_posters = byGenre("Action")
     year_movies, year_posters = byYear("2016")
-    genres = ["Comedy", "Action", "Animation"]
-    castList = ["Robert De Niro", "Samuel L. Jackson", "Bruce Willis", "Matt Damon", "Nicolas Cage"]
-    choice_movies = byChoice(genres,castList,select)
+    genreList = request.form.getlist('genre-checkbox')
+    castList = request.form.getlist('cast-checkbox')
+    selected_genres = []
+    for i in genreList:
+        selected_genres.append(i.replace("-", " "))
+    selected_cast = []
+    for i in castList:
+        selected_cast.append(i.replace("-", " "))
+    choice_movies = byChoice(selected_genres, selected_cast, select)
     choice_idx = []
     choice_posters=[]
     for mov in choice_movies:
