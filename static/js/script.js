@@ -26,24 +26,30 @@ $(document).ready(function() {
             var email = upForm.elements['user_email'].value;
             var mobile = upForm.elements['user_mobile'].value;
             var password = upForm.elements['user_password'].value;
-    
-            var url = "http://127.0.0.1:5000/signup";
-            $.post(url, {
-                email: email,
-                mobile: mobile,
-                password: password,
-            },function(data, status) {
-                console.log(data, status);
-                if(data == "choices") {
-                    var url = "http://127.0.0.1:5000/choices";
-                    window.location.href = url;
-                }
-                else {
-                    var errorMsg = data;
+
+            if(email=="" || mobile=="" || password=="") {
+                var errorMsg = "Please fill all the fields.";
                     document.getElementById("error").innerHTML = errorMsg;
-                }
-            });
-    
+            }
+            else {
+                var url = "http://127.0.0.1:5000/signup";
+                $.post(url, {
+                    email: email,
+                    mobile: mobile,
+                    password: password,
+                },function(data, status) {
+                    console.log(data, status);
+                    if(data == "choices") {
+                        var url = "http://127.0.0.1:5000/choices";
+                        window.location.href = url;
+                    }
+                    else {
+                        var errorMsg = data;
+                        document.getElementById("error").innerHTML = errorMsg;
+                    }
+                });
+            }
+
             event.preventDefault();
         };
         upBtn.onclick = handleClick;
@@ -61,22 +67,28 @@ $(document).ready(function() {
             var email = inForm.elements['user_email'].value;
             var password = inForm.elements['user_password'].value;
 
-            var url = "http://127.0.0.1:5000/signin";
-            $.post(url, {
-                email: email,
-                password: password,
-            },function(data, status) {
-                console.log(data, status);
-                if(data == "recommendations") {
-                    var url = "http://127.0.0.1:5000/recommendations";
-                    window.location.href = url;
-                }
-                else {
-                    var errorMsg = data;
+            if(email=="" || password=="") {
+                var errorMsg = "Please fill all the fields.";
                     document.getElementById("error-msg").innerHTML = errorMsg;
-                }
-            });
-    
+            }
+            else {
+                var url = "http://127.0.0.1:5000/signin";
+                $.post(url, {
+                    email: email,
+                    password: password,
+                },function(data, status) {
+                    console.log(data, status);
+                    if(data == "recommendations") {
+                        var url = "http://127.0.0.1:5000/recommendations";
+                        window.location.href = url;
+                    }
+                    else {
+                        var errorMsg = data;
+                        document.getElementById("error-msg").innerHTML = errorMsg;
+                    }
+                });
+            }
+
             event.preventDefault();
         };
         inBtn.onclick = handleClick;
