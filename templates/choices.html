@@ -28,7 +28,7 @@
 
     <!-- Select Section -->
     <div class="container">
-        <form action="/recommendations" method="POST">
+        <form action="/recommendations" method="POST" id="choice-form">
             <div class="select-heading">
                 <h2>Select your top 3 Genres</h2>
             </div>
@@ -68,7 +68,7 @@
                     {% endfor %}
                 </ul>
             </div>
-            <input type="submit" class="select-submit" value="Done">
+            <button id="choice-btn" class="select-submit">Done </button>
         </form>
     </div>
 

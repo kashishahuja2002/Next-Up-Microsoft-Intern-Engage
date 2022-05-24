@@ -17,58 +17,70 @@ function movieSelect()
 
 
 
-// Sign-in Page
-
-const form  = document.getElementById("signin-form");
-form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    var email = form.elements['user_email'].value;
-    var password = form.elements['user_password'].value;
-
-    var url = "http://127.0.0.1:5000/signin";
-    $.post(url, {
-        email: email,
-        password: password,
-    },function(data, status) {
-        console.log(data, status);
-        if(data == "recommendations") {
-            var url = "http://127.0.0.1:5000/recommendations";
-            window.location.href = url;
-        }
-        else {
-            var errorMsg = data;
-            document.getElementById("error-msg").innerHTML = errorMsg;
-        }
-    });
+// Sign-up Page
+$(document).ready(function() {
+    var upBtn = document.getElementById("up-btn");
+    if (!(upBtn == null)) {
+        var handleClick = function (event) {
+            var upForm = document.getElementById("up-form")
+            var email = upForm.elements['user_email'].value;
+            var mobile = upForm.elements['user_mobile'].value;
+            var password = upForm.elements['user_password'].value;
+    
+            var url = "http://127.0.0.1:5000/signup";
+            $.post(url, {
+                email: email,
+                mobile: mobile,
+                password: password,
+            },function(data, status) {
+                console.log(data, status);
+                if(data == "choices") {
+                    var url = "http://127.0.0.1:5000/choices";
+                    window.location.href = url;
+                }
+                else {
+                    var errorMsg = data;
+                    document.getElementById("error").innerHTML = errorMsg;
+                }
+            });
+    
+            event.preventDefault();
+        };
+        upBtn.onclick = handleClick;
+    }
 });
 
 
 
-// Sign-up Page
+// Sign-in Page
+$(document).ready(function() {
+    var inBtn = document.getElementById("in-btn");
+    if (!(inBtn == null)) {
+        var handleClick = function (event) {
+            var inForm = document.getElementById("in-form")
+            var email = inForm.elements['user_email'].value;
+            var password = inForm.elements['user_password'].value;
 
-const newForm  = document.getElementById("signup-form");
-newForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-    var email = newForm.elements['user_email'].value;
-    var mobile = newForm.elements['user_mobile'].value;
-    var password = newForm.elements['user_password'].value;
-
-    var url = "http://127.0.0.1:5000/signup";
-    $.post(url, {
-        email: email,
-        mobile: mobile,
-        password: password,
-    },function(data, status) {
-        console.log(data, status);
-        if(data != "choices") {
-            var errorMsg = data;
-            document.getElementById("error").innerHTML = errorMsg;
-        }
-        else if(data == "choices"){
-            var url = "http://127.0.0.1:5000/choices";
-            window.location.href = url;
-        }
-    });
+            var url = "http://127.0.0.1:5000/signin";
+            $.post(url, {
+                email: email,
+                password: password,
+            },function(data, status) {
+                console.log(data, status);
+                if(data == "recommendations") {
+                    var url = "http://127.0.0.1:5000/recommendations";
+                    window.location.href = url;
+                }
+                else {
+                    var errorMsg = data;
+                    document.getElementById("error-msg").innerHTML = errorMsg;
+                }
+            });
+    
+            event.preventDefault();
+        };
+        inBtn.onclick = handleClick;
+    }
 });
 
 
@@ -116,6 +128,7 @@ function yearSelected() {
 }
 
 
+
 // Movie Page
 
 var genreLimit = 3;
@@ -132,19 +145,19 @@ $('input.cast-checkbox').on('change', function(evt) {
     }
 });
 
-// function choiceSubmit() {
-//     genres = ('input[name="genre-checkbox"]:checked').length;
-//     cast = ('input[name="cast-checkbox"]:checked').length;
-
-//     console.log(genres, cast);
-//     // if(genres != 3 || cast != 5) {
-//     //     alert("Please select 3 genres and 5 casts.");
-//     // }
-//     // else {
-//     //     document.getElementById("choice-form").submit();
-//     // }
-// }
-
-// $('input[name="genres"]:checked').each(function() {
-//     console.log(this.value);
-// });
+var choiceBtn = document.getElementById("choice-btn");
+if (!(choiceBtn == null)) {
+    var handleClick = function (event) {
+        genres = $('input[name="genre-checkbox"]:checked').length;
+        cast = $('input[name="cast-checkbox"]:checked').length;
+    
+        if(genres == 3 && cast == 5) {
+            document.getElementById("choice-form").submit();
+        }
+        else {
+            alert("Please select 3 genres and 5 casts.");
+            event.preventDefault();
+        }
+    };
+    choiceBtn.onclick = handleClick;
+}

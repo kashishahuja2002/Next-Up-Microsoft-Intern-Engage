@@ -36,15 +36,14 @@
                 <div class="login-form">
                     <div class="login-div">               
                         <h2>Sign Up</h2>
-                        <form id="signup-form">
+                        <form id="up-form">
                             <div class="login-container">
-                                <!-- <input placeholder="Email" class="form-control" type="email" name="user_email" {% if email!=None %} value={{email}} {% endif %} required> -->
                                 <input placeholder="Email" class="form-control" type="email" name="user_email" required>
                                 <input placeholder="Mobile number" class="form-control" type="tel" name="user_mobile" required>
                                 <input placeholder="Create Password" class="form-control" type="password" name="user_password" required>
                             </div>
                             
-                            <button class="btn btnlogin mt-4" type="submit">Create Account</button>
+                            <button id="up-btn" class="btn btnlogin mt-4">Create Account</button>
                         </form>
                         <p class="text-center" id="error"></p>
                     </div>                        
@@ -63,6 +62,33 @@
 
     <!-- Select 2 script -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+    <script>
+        function upSubmit(event) {
+            event.preventDefault();
+        }
+        
+//     var email = newForm.elements['user_email'].value;
+//     var mobile = newForm.elements['user_mobile'].value;
+//     var password = newForm.elements['user_password'].value;
+
+//     var url = "http://127.0.0.1:5000/signup";
+//     $.post(url, {
+//         email: email,
+//         mobile: mobile,
+//         password: password,
+//     },function(data, status) {
+//         console.log(data, status);
+//         if(data != "choices") {
+//             var errorMsg = data;
+//             document.getElementById("error").innerHTML = errorMsg;
+//         }
+//         else if(data == "choices"){
+//             var url = "http://127.0.0.1:5000/choices";
+//             window.location.href = url;
+//         }
+//     });
+    </script>
 
     <!-- Local JS files  -->
     <script src="../static/js/script.js"></script>
