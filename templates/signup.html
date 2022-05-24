@@ -28,7 +28,7 @@
                     <img src="../static/images/logo.png" alt="">
                 </div>
                 <div class="right">
-                    <button><a href="#">Sign In</a></button>
+                    <button><a href="/signin">Sign In</a></button>
                 </div>
             </nav>
     
@@ -36,14 +36,17 @@
                 <div class="login-form">
                     <div class="login-div">               
                         <h2>Sign Up</h2>
-                        <form method="post" action="">
+                        <form id="signup-form">
                             <div class="login-container">
+                                <!-- <input placeholder="Email" class="form-control" type="email" name="user_email" {% if email!=None %} value={{email}} {% endif %} required> -->
                                 <input placeholder="Email" class="form-control" type="email" name="user_email" required>
-                                <input placeholder="Create Password" type="password" name="user_password" required>
+                                <input placeholder="Mobile number" class="form-control" type="tel" name="user_mobile" required>
+                                <input placeholder="Create Password" class="form-control" type="password" name="user_password" required>
                             </div>
                             
                             <button class="btn btnlogin mt-4" type="submit">Create Account</button>
                         </form>
+                        <p class="text-center" id="error"></p>
                     </div>                        
                 </div>
             </section>

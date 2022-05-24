@@ -174,7 +174,7 @@ a {
     outline: none;
 }
 
-.content-mail button {
+.content-mail button{
     background-color: var(--cyan);
     color: #000;
     padding: 10px;
@@ -231,7 +231,7 @@ a {
     margin-right: 0!important;
 }
 
-.login-right .login-form form input[type=password], .login-right .login-form form input[type=text], .login-right .login-form form input[type=email] {
+.login-right .login-form form input[type=password], .login-right .login-form form input[type=tel], .login-right .login-form form input[type=email] {
     border-radius: 3px;
     width: 100%;
     border: 1px solid #eee;
@@ -252,11 +252,14 @@ a {
 .login-right .login-form .forgot {
     display: inline-block;
     font-size: 12px;
-    float: right;
     text-decoration: none;
     color: #aaa;
     outline: 0;
     margin: 5px 0;
+}
+
+.login-div p {
+    color: red;
 }
 
 @media screen and (max-width: 1200px) {

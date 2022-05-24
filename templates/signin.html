@@ -32,7 +32,7 @@
                     <img src="../static/images/logo.png" alt="">
                 </div>
                 <div class="right">
-                    <button><a href="#">Sign Up</a></button>
+                    <button><a href="/signup">Sign Up</a></button>
                 </div>
             </nav>
     
@@ -40,7 +40,7 @@
                 <div class="login-form">
                     <div class="login-div">               
                         <h2>Sign In</h2>
-                        <form method="post" action="">
+                        <form id="signin-form">
                             <div class="login-container">
                                 <input placeholder="Email" class="form-control" type="email" name="user_email" required>
                                 <input placeholder="Password" type="password" name="user_password" required>
@@ -49,6 +49,7 @@
                             <button class="btn btnlogin mt-4" type="submit">Sign In</button>
                             <a class="forgot" href="#">Forgot Password ?</a>
                         </form>
+                        <p class="text-center" id="error-msg"></p>
                     </div>                        
                 </div>
             </section>
