@@ -1,3 +1,5 @@
+const baseUrl = "http://127.0.0.1:5000/"
+
 // Header
 
 // Select2
@@ -11,7 +13,7 @@ function movieSelect()
     let selection = document.getElementById('movieSelect');
     let selectedMovie = selection.options[selection.selectedIndex].text;
 
-    var url = "http://127.0.0.1:5000/movie/"+selectedMovie;
+    var url = baseUrl+"movie/"+selectedMovie;
     window.location.href = url;
 }
 
@@ -32,7 +34,7 @@ $(document).ready(function() {
                     document.getElementById("error").innerHTML = errorMsg;
             }
             else {
-                var url = "http://127.0.0.1:5000/signup";
+                var url = baseUrl+"signup";
                 $.post(url, {
                     email: email,
                     mobile: mobile,
@@ -40,7 +42,7 @@ $(document).ready(function() {
                 },function(data, status) {
                     console.log(data, status);
                     if(data == "choices") {
-                        var url = "http://127.0.0.1:5000/choices";
+                        var url = baseUrl+"choices";
                         window.location.href = url;
                     }
                     else {
@@ -72,14 +74,14 @@ $(document).ready(function() {
                     document.getElementById("error-msg").innerHTML = errorMsg;
             }
             else {
-                var url = "http://127.0.0.1:5000/signin";
+                var url = baseUrl+"signin";
                 $.post(url, {
                     email: email,
                     password: password,
                 },function(data, status) {
                     console.log(data, status);
                     if(data == "recommendations") {
-                        var url = "http://127.0.0.1:5000/recommendations";
+                        var url = baseUrl+"recommendations";
                         window.location.href = url;
                     }
                     else {
@@ -110,7 +112,7 @@ function genreSelected()
 {
     let selection = document.getElementById("genres");
     let selectedGenre = selection.options[selection.selectedIndex].text;
-    var url = "http://127.0.0.1:5000/getByGenre";
+    var url = baseUrl+"getByGenre";
     $.post(url, {
         genre: selectedGenre,
     },function(data, status) {
@@ -126,7 +128,7 @@ function genreSelected()
 function yearSelected() {
     let selection = document.getElementById("years");
     let selectedYear = selection.options[selection.selectedIndex].text;
-    var url = "http://127.0.0.1:5000/getByYear";
+    var url = baseUrl+"getByYear";
     $.post(url, {
         year: selectedYear,
     },function(data, status) {
