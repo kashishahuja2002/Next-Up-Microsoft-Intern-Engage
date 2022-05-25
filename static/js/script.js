@@ -141,7 +141,7 @@ function yearSelected() {
 
 
 
-// Movie Page
+// Choice Page
 
 var genreLimit = 3;
 $('input.genre-checkbox').on('change', function(evt) {
@@ -173,3 +173,17 @@ if (!(choiceBtn == null)) {
     };
     choiceBtn.onclick = handleClick;
 }
+
+
+
+// Movie Page
+
+$(document).on('click','#thumbs-up',function(e) {
+    $("i#thumbs-up").toggleClass("active");
+    $("i#thumbs-down").removeClass("active");
+});
+
+$(document).on('click','#thumbs-down',function(e) {
+    $("i#thumbs-down").toggleClass("active");
+    $("i#thumbs-up").removeClass("active");
+});
