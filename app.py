@@ -303,6 +303,7 @@ def recommendations():
         print("Session not found")
         return redirect(url_for("signin"))
 
+
 @app.route('/movie/<movie_name>')
 def movie(movie_name):
 
@@ -331,6 +332,13 @@ def movie(movie_name):
     else:
         print("Session not found")
         return redirect(url_for("signin"))
+
+
+@app.route('/logout')
+def logout():
+    session.pop("user", None)
+    return redirect(url_for("index"))
+
 
 if __name__ == "__main__":
     app.run()
