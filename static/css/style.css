@@ -344,7 +344,7 @@ a {
 }
 
 .watch-movie:hover {
-    color: #aaa;
+    color: var(--cyan);
     text-decoration: none;
 }
 
@@ -674,5 +674,12 @@ select {
 }
 
 .watch-box {
-    min-height: 525px;
+    min-height: 500px;
+}
+
+
+/* Footer */
+.footer {
+    color: var(--cyan);
+    margin-bottom: 20px;
 }
