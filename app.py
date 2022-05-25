@@ -1,40 +1,39 @@
 
 import pickle
-import numpy as np
 import pandas as pd
 import requests
-import flask
-import ast
 from flask import Flask, redirect, render_template, request, jsonify, url_for, session
-from flask_cors import CORS, cross_origin
 import operator
 import sqlite3
+from annoy import AnnoyIndex
 
 app = Flask(__name__)
 app.secret_key = "secret key"
 
-
 def db_connection():
     conn = None
     try:
-        conn = sqlite3.connect('users.sqlite')
+        conn = sqlite3.connect('./model/data/users.sqlite')
     except sqlite3.error as e:
         print(e)
     return conn
 
 
+# Data loading
 dataset = pickle.load(open('./model/data/dataset.pkl', 'rb'))
 movies = pd.DataFrame(dataset)
 
-similarity = pickle.load(open('./model/data/similarity.pkl', 'rb'))
 popular = pickle.load(open('./model/data/popular.pkl', 'rb'))
 select = pickle.load(open('./model/data/select.pkl', 'rb'))
 
+
+# Home page
 @app.route('/')
 def index():
     return render_template("index.html")
 
 
+# Signup page
 signup_email = ""
 signup_password = ""
 signup_mobile = ""
@@ -65,6 +64,7 @@ def signup():
     return response
 
 
+# Signin page
 signin_email = ""
 @app.route('/signin', methods=['GET','POST'])
 def signin():
@@ -93,6 +93,7 @@ def signin():
     return response
 
 
+# Choices page
 @app.route('/choices', methods=['GET','POST'])
 def choices():
     global signup_email
@@ -136,6 +137,14 @@ def fetchTrailer(movie_id):
     for vid in data['results']:
         if vid['name'].find("Trailer") != -1:
             return vid['key']
+
+def fetchBackdrop(movie_id):
+    response = requests.get(
+        'https://api.themoviedb.org/3/movie/{}?api_key=65669b357e1045d543ba072f7f533bce&language=en-US'.format(
+            movie_id))
+    data = response.json()
+    print("https://image.tmdb.org/t/p/original"+str(data['backdrop_path']))
+    return "https://image.tmdb.org/t/p/original"+str(data['backdrop_path'])
 
 
 def fetchPoster(movie_id):
@@ -248,6 +257,7 @@ def getByYear():
     return response
 
 
+# Recommendations page
 @app.route('/recommendations', methods=['POST', 'GET'])
 def recommendations():
     global signin_email
@@ -294,7 +304,7 @@ def recommendations():
             movie_idx = movies[movies['title'] == mov].index[0]
             choice_idx.append(movie_idx)
             movie_id = movies.iloc[movie_idx].movie_id
-            choice_posters.append(fetchPoster(movie_id))
+            choice_posters.append(fetchBackdrop(movie_id))
         genre_movies, genre_posters = byGenre("Action")
         year_movies, year_posters = byYear("2016")
 
@@ -304,20 +314,23 @@ def recommendations():
         return redirect(url_for("signin"))
 
 
+# Movie page
 @app.route('/movie/<movie_name>')
 def movie(movie_name):
 
     if "user" in session:
         def recommend(movie):
             movie_index = movies[movies['title'] == movie].index[0]
-            distances = similarity[movie_index]
-            movies_list = sorted(list(enumerate(distances)), reverse=True, key=lambda x: x[1])[1:7]
+            u = AnnoyIndex(5000, 'angular')
+            u.load('./model/data/vectors.ann')
+            movies_list = (u.get_nns_by_item(movie_index, 7))[1:7]
+
 
             recommended_movies = []
             movie_posters = []
             for i in movies_list:
-                rec_movie_id = movies.iloc[i[0]].movie_id
-                recommended_movies.append(movies.iloc[i[0]].title)
+                rec_movie_id = movies.iloc[i].movie_id
+                recommended_movies.append(movies.iloc[i].title)
                 movie_posters.append(fetchPoster(rec_movie_id))
             return recommended_movies, movie_posters
 
@@ -334,6 +347,7 @@ def movie(movie_name):
         return redirect(url_for("signin"))
 
 
+# Logout
 @app.route('/logout')
 def logout():
     session.pop("user", None)
@@ -344,6 +358,14 @@ if __name__ == "__main__":
     app.run()
 
 
+
+# LIST TO STRING
+# s = ['Geeks for geeks', 'for alla', 'Geeks djfh jhsds']
+# new="$".join(s)
+
+# STRING TO LIST
+# ano=list(new.split("$"))
+
 # movie_ids = movies['movie_id'].values
 # for x in range(1, 100):
 #     movie_id = movies.iloc[x].movie_id
@@ -351,20 +373,6 @@ if __name__ == "__main__":
 
     # for i in movie_ids:
     #     print(fetchPoster(i))
-
-
-# s = ['Geeks for geeks', 'for alla', 'Geeks djfh jhsds']
-# new="$".join(s)
-# print(new)
-#
-# ano=list(new.split("$"))
-# print(ano)
-
-# // $('input[name="genres"]:checked').each(function() {
-# //     console.log(this.value);
-# // });
-
-
 
 # movie_ids = movies['movie_id'].values
 # for x in range(0, 100):
