@@ -355,6 +355,14 @@ a {
     color: #fff;
 }
 
+.movie-card {
+    transition: transform 0.2s;
+}
+
+.movie-card:hover {
+    transform: scale(1.1);
+}
+
 @media screen and (max-width: 576px) {
     .text-wrapper h2{
         font-size: 1.5rem;
@@ -446,7 +454,7 @@ a {
     text-overflow: ellipsis;
     white-space:initial;
     display: -webkit-box;
-    -webkit-line-clamp: 8;
+    -webkit-line-clamp: 6;
     -webkit-box-orient: vertical;
 }
 
@@ -480,6 +488,15 @@ select {
     color: #fff;
     border: none;
     border-bottom: 1px solid #fff;
+}
+
+.text-contain {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space:initial;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
 }
 
 @media screen and (max-width: 576px) {
