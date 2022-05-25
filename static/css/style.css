@@ -337,6 +337,17 @@ a {
     overflow: hidden;
 }
 
+.watch-movie {
+    color: #aaa;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.watch-movie:hover {
+    color: #aaa;
+    text-decoration: none;
+}
+
 /* Recommendations Section */
 .title {
     color: #fff;
@@ -636,4 +647,16 @@ select {
     .select-heading h2{
         font-size: 22px;
     }
+}
+
+
+/********* Watch Movie Page **********/
+.watch-name {
+    color: #fff;
+    padding-left: 5%;
+    margin-top: 1.5%;
+}
+
+.watch-box {
+    min-height: 525px;
 }

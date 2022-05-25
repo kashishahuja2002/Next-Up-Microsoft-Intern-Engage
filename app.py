@@ -347,6 +347,16 @@ def movie(movie_name):
         return redirect(url_for("signin"))
 
 
+# Watch page
+@app.route('/watch/<movie_name>')
+def watch(movie_name):
+    if "user" in session:
+        return render_template("watch.html", movie_name=movie_name)
+    else:
+        print("Session not found")
+        return redirect(url_for("signin"))
+
+
 # Logout
 @app.route('/logout')
 def logout():

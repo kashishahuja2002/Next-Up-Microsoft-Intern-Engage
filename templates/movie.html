@@ -43,7 +43,7 @@
 
     <!-- Movie Section -->
     <div class="container-fluid">
-        <div class="row movie-box">
+        <div class="row movie-box mt-3">
             <div class="movie-vid col-md-8 d-md-none">
                 <iframe width="100%" height="100%" src="https://www.youtube.com/embed/{{trailer_key}}?autoplay=1&showinfo=0&controls=0&mute=1&playlist={{trailer_key}}&loop=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
@@ -69,12 +69,15 @@
                         {% endif %}
                         {% if movies.iloc[movie_idx].overview: %}
                         <p class="text-contain">{{movies.iloc[movie_idx].overview}}</p>
-                        {% endif %}
+                        {% endif %} <br> 
+                        <a href="/watch/{{movies.iloc[movie_idx].title}}" class="watch-movie">
+                            <i class="fa fa-play"></i>
+                            Watch Movie
+                        </a>
                     </div>
                 </div>
             </div>
             <div class="movie-vid col-md-8 d-none d-md-block">
-                <!-- 5PSNL1qE6VY -->
                 <iframe width="100%" height="100%" src="https://www.youtube.com/embed/{{trailer_key}}?autoplay=1&showinfo=0&controls=0&mute=1&playlist={{trailer_key}}&loop=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
