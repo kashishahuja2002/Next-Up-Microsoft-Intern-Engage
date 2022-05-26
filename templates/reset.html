@@ -31,25 +31,20 @@
                 <a href="/" class="left">
                     <img src="../static/images/logo.png" alt="">
                 </a>
-                <div class="right">
-                    <a href="/signup">Sign Up</a>
-                </div>
             </nav>
     
             <section class="content login-right">
                 <div class="login-form">
                     <div class="login-div">               
-                        <h2>Sign In</h2>
-                        <form id="in-form">
+                        <h2>Reset Password</h2>
+                        <form id="reset-form">
                             <div class="login-container">
-                                <input placeholder="Email" class="form-control" type="email" name="user_email" required>
-                                <input placeholder="Password" type="password" name="user_password" required>
+                                <input placeholder="New Password" type="password" name="new_password" required>
                             </div>
                             
-                            <button id="in-btn" type="submit" class="btn btnlogin mt-4">Sign In</button>
-                            <a class="forgot" id="forgot">Forgot Password ?</a>
+                            <button id="reset-btn" type="submit" class="btn btnlogin mt-4">Reset</button>
                         </form>
-                        <p class="text-center" id="error-msg"></p>
+                        <p class="text-center" id="reset-err"></p>
                     </div>                        
                 </div>
             </section>

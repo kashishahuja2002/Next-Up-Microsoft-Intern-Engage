@@ -1,4 +1,3 @@
-
 import pickle
 import pandas as pd
 import requests
@@ -6,10 +5,22 @@ from flask import Flask, redirect, render_template, request, jsonify, url_for, s
 import operator
 import sqlite3
 from annoy import AnnoyIndex
+from flask_mail import Mail, Message
+from random import randint
 
 app = Flask(__name__)
 app.secret_key = "secret key"
 
+# Flask mail configuration
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = "kashishahuja2002@gmail.com"
+app.config['MAIL_PASSWORD'] = "dleiatmoyykkaafn"
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail = Mail(app)
+
+# Database (users) connection
 def db_connection():
     conn = None
     try:
@@ -357,6 +368,74 @@ def watch(movie_name):
         return redirect(url_for("signin"))
 
 
+
+otp = ""  
+# Forgot page
+@app.route('/forgot', methods=['GET','POST'])
+def forgot():
+    global signin_email
+    global otp
+
+    response = render_template("forgotPass.html")
+    if request.method == 'POST':
+        conn = db_connection()
+        cursor = conn.cursor()
+
+        signin_email = request.form["email"]
+
+        sql_query = "Select email, password from users where email= '"+signin_email+"'"
+        cursor.execute(sql_query)
+        results = cursor.fetchall()
+
+        if len(results) == 0:
+            response = "This email is not registered. <br> Please sign-up first."
+        else:
+            response = "forgot"
+
+    if response=="forgot":
+        range_start = 10**(6-1)
+        range_end = (10**6)-1
+        otp = randint(range_start, range_end)
+        message = Message("NEW3 OTP for password reset", sender="kashishahuja2002@gmail.com", recipients=[signin_email])
+        message.body = "OTP: "+str(otp)
+        print(message)
+        mail.send(message)
+
+    return response
+
+
+# reset page
+@app.route('/reset', methods=['GET','POST'])
+def reset():
+    global otp
+    response = render_template("reset.html")
+    if request.method == 'POST':
+        num = request.form["otp"]
+        if str(num)==str(otp):
+            response = "valid"
+        else:
+            print(otp, num)
+            response = "OTP entered is incorrect"
+
+    return response
+
+
+# change password in database
+@app.route('/change', methods=['GET','POST'])
+def change():
+    global signin_email
+    if request.method == 'POST':
+        newPass = request.form["newPass"]
+        conn = db_connection()
+        cursor = conn.cursor()
+        sql_query = "Update users set password = '"+newPass+"' where email = '"+signin_email+"'"
+        cursor.execute(sql_query)
+        conn.commit()
+        session["user"] = signin_email
+
+    return "recommendations"
+
+
 # Logout
 @app.route('/logout')
 def logout():
@@ -365,7 +444,7 @@ def logout():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
 
 
 

@@ -95,6 +95,106 @@ $(document).ready(function() {
         };
         inBtn.onclick = handleClick;
     }
+
+    var forgotLink = document.getElementById("forgot");
+    if (!(forgotLink == null)) {
+        var handleClick = function (event) {
+            var inForm = document.getElementById("in-form")
+            var email = inForm.elements['user_email'].value;
+            if(email=="") {
+                var errorMsg = "Please enter your email address.";
+                document.getElementById("error-msg").innerHTML = errorMsg;
+                event.preventDefault();
+            }
+            else {
+                var url = baseUrl+"forgot";
+                $.post(url, {
+                    email: email,
+                },function(data, status) {
+                    console.log(data, status);
+                    if(data == "forgot") {
+                        var url = baseUrl+"forgot";
+                        window.location.href = url;
+                    }
+                    else {
+                        var errorMsg = data;
+                        document.getElementById("error-msg").innerHTML = errorMsg;
+                        event.preventDefault();
+                    }
+                });
+            }
+        };  
+        forgotLink.onclick = handleClick;
+    }
+});
+
+
+
+
+// forgotPass Page
+$(document).ready(function() {
+    var forgotBtn = document.getElementById("forgot-btn");
+    if (!(forgotBtn == null)) {
+        var handleClick = function (event) {
+            var forgotForm = document.getElementById("forgot-form")
+            var otp = forgotForm.elements['user_otp'].value;
+
+            if(otp=="") {
+                var errorMsg = "Please enter OTP.";
+                document.getElementById("err").innerHTML = errorMsg;
+            }
+            else {
+                var url = baseUrl+"reset";
+                $.post(url, {
+                    otp: otp,
+                },function(data, status) {
+                    console.log(data, status);
+                    if(data == "valid") {
+                        var url = baseUrl+"reset";
+                        window.location.href = url;
+                    }
+                    else {
+                        var errorMsg = data;
+                        document.getElementById("err").innerHTML = errorMsg;
+                    }
+                });
+            }
+
+            event.preventDefault();
+        };
+        forgotBtn.onclick = handleClick;
+    }
+});
+
+
+
+// Reset Page
+$(document).ready(function() {
+    var resetBtn = document.getElementById("reset-btn");
+    if (!(resetBtn == null)) {
+        var handleClick = function (event) {
+            var resetForm = document.getElementById("reset-form")
+            var newPass = resetForm.elements['new_password'].value;
+
+            if(newPass=="") {
+                var errorMsg = "Please enter new password.";
+                document.getElementById("reset-err").innerHTML = errorMsg;
+            }
+            else {
+                var url = baseUrl+"change";
+                $.post(url, {
+                    newPass: newPass,
+                },function(data, status) {
+                    console.log(data, status);
+                    var url = baseUrl+"recommendations";
+                    window.location.href = url;
+                });
+            }
+
+            event.preventDefault();
+        };
+        resetBtn.onclick = handleClick;
+    }
 });
 
 

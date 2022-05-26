@@ -229,7 +229,7 @@ a {
     margin-right: 0!important;
 }
 
-.login-right .login-form form input[type=password], .login-right .login-form form input[type=tel], .login-right .login-form form input[type=email] {
+.login-right .login-form form input[type=password], .login-right .login-form form input[type=tel], .login-right .login-form form input[type=email], .login-right .login-form form input[type=text] {
     border-radius: 3px;
     width: 100%;
     border: 1px solid #eee;
