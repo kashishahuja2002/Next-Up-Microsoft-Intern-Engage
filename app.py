@@ -20,11 +20,30 @@ app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
 
-# Database (users) connection
-def db_connection():
+# Database connections
+# users table
+def db_user_connection():
     conn = None
     try:
         conn = sqlite3.connect('./model/data/users.sqlite')
+    except sqlite3.error as e:
+        print(e)
+    return conn
+
+# popular table
+def db_popular_connection():
+    conn = None
+    try:
+        conn = sqlite3.connect('./model/data/popular.sqlite')
+    except sqlite3.error as e:
+        print(e)
+    return conn
+
+# choice table
+def db_choice_connection():
+    conn = None
+    try:
+        conn = sqlite3.connect('./model/data/choice.sqlite')
     except sqlite3.error as e:
         print(e)
     return conn
@@ -34,8 +53,7 @@ def db_connection():
 dataset = pickle.load(open('./model/data/dataset.pkl', 'rb'))
 movies = pd.DataFrame(dataset)
 
-popular = pickle.load(open('./model/data/popular.pkl', 'rb'))
-select = pickle.load(open('./model/data/select.pkl', 'rb'))
+select = pickle.load(open('./model/data/choice.pkl', 'rb'))
 
 
 # Home page
@@ -56,7 +74,7 @@ def signup():
     response = render_template("signup.html")
 
     if request.method == 'POST':
-        conn = db_connection()
+        conn = db_user_connection()
         cursor = conn.cursor()
 
         signup_email = request.form["email"]
@@ -83,7 +101,7 @@ def signin():
     response = render_template("signin.html")
 
     if request.method == 'POST':
-        conn = db_connection()
+        conn = db_user_connection()
         cursor = conn.cursor()
 
         signin_email = request.form["email"]
@@ -154,7 +172,6 @@ def fetchBackdrop(movie_id):
         'https://api.themoviedb.org/3/movie/{}?api_key=65669b357e1045d543ba072f7f533bce&language=en-US'.format(
             movie_id))
     data = response.json()
-    print("https://image.tmdb.org/t/p/original"+str(data['backdrop_path']))
     return "https://image.tmdb.org/t/p/original"+str(data['backdrop_path'])
 
 
@@ -164,68 +181,76 @@ def fetchPoster(movie_id):
     return poster
 
 
-def byChoice(genres, castList, obj):
-    choice = obj.copy()
+def byChoice(genreList, castList):
 
-    def byChoiceCast():
-        cast_fre = []
-        for row in choice.iterrows():
-            castFre = 0
-            for cast in row[1].cast:
-                for item in castList:
-                    if cast == item:
-                        castFre += 1
-            cast_fre.append(castFre)
-        return cast_fre
+    conn = db_choice_connection()
+    cursor = conn.cursor()
+    sql_query = "Select * from choice"
+    cursor.execute(sql_query)
+    results = cursor.fetchall()
 
-    choice['cast_fre'] = byChoiceCast()
-    choice = choice[choice['cast_fre'] != 0]
+    for row in results:
+        cf = 0
+        mov_cast = list(row[4].split("$"))
+        for cast in mov_cast:
+            for c in castList:
+                if cast == c:
+                    cf += 1
+        if cf != 0:
+            sql_query = "Update choice set castFre = " + str(cf)+" where movie_id = "+str(row[1])
+            cursor.execute(sql_query)
 
-    def byChoiceGenre():
-        gen_fre = []
-        for row in choice.iterrows():
-            genFre = 0
-            for gen in row[1].genres:
-                for item in genres:
-                    if gen == item:
-                        genFre += 1
-            gen_fre.append(genFre)
-        return gen_fre
+    for row in results:
+        gf = 0
+        mov_gen = list(row[3].split("$"))
+        for gen in mov_gen:
+            for g in genreList:
+                if gen == g:
+                    gf += 1
+        if gf != 0:
+            sql_query = "Update choice set genFre = "+str(gf)+" where movie_id = "+str(row[1])
+            cursor.execute(sql_query)
 
-    choice['gen_fre'] = byChoiceGenre()
-    choice = choice[choice['gen_fre'] != 0]
-
-    choice = choice.sort_values('cast_fre', ascending=False)
+    sql_query = "Select * from choice where (genFre>0 AND castFre >0) order by castFre DESC"
+    cursor.execute(sql_query)
+    results = cursor.fetchall()
 
     choice_movies = []
     counter = 0
-    for mov in choice.iterrows():
+    for row in results:
         if counter != 3:
-            choice_movies.append(mov[1].title)
+            choice_movies.append(row[2])
             counter += 1
         else:
             break
+
     return choice_movies
 
 
 def byGenre(genre):
     counter = 0
     genre_movies = []
-    for row in popular.iterrows():
+    genre_posters = []
+
+    conn = db_popular_connection()
+    cursor = conn.cursor()
+    sql_query = "Select movie_id, genres from popular"
+    cursor.execute(sql_query)
+    results = cursor.fetchall()
+
+    for row in results:
         if counter != 6:
-            for gen in row[1].genres:
+            mov_gen = list(row[1].split("$"))
+            for gen in mov_gen:
                 if gen == genre:
-                    genre_movies.append(row[1].title)
+                    cursor.execute("Select title from popular where movie_id = '"+str(row[0])+"'")
+                    title = cursor.fetchall()
+                    genre_movies.append(title[0][0])
+                    genre_posters.append(fetchPoster(row[0]))
                     counter += 1
                     break
         else:
             break
-
-    genre_posters = []
-    for i in genre_movies:
-        movie_index = movies[movies['title'] == i].index[0]
-        movie_id = movies.iloc[movie_index].movie_id
-        genre_posters.append(fetchPoster(movie_id))
 
     return genre_movies, genre_posters
 
@@ -242,19 +267,24 @@ def getByGenre():
 def byYear(year):
     counter = 0
     year_movies = []
-    for row in popular.iterrows():
-        if row[1].release_date == year:
-            if counter != 6:
-                year_movies.append(row[1].title)
-                counter = counter + 1
-            else:
-                break
-
     year_posters = []
-    for i in year_movies:
-        movie_index = movies[movies['title'] == i].index[0]
-        movie_id = movies.iloc[movie_index].movie_id
-        year_posters.append(fetchPoster(movie_id))
+
+    conn = db_popular_connection()
+    cursor = conn.cursor()
+    sql_query = "Select movie_id, release_date from popular"
+    cursor.execute(sql_query)
+    results = cursor.fetchall()
+
+    for row in results:
+        if counter != 6:
+            if year == row[1]:
+                cursor.execute("Select title from popular where movie_id = '"+str(row[0])+"'")
+                title = cursor.fetchall()
+                year_movies.append(title[0][0])
+                year_posters.append(fetchPoster(row[0]))
+                counter += 1
+        else:
+            break
 
     return year_movies, year_posters
 
@@ -274,7 +304,7 @@ def recommendations():
     global signin_email
     global signup_email
 
-    conn = db_connection()
+    conn = db_user_connection()
     cursor = conn.cursor()
     selected_genres = []
     selected_cast = []
@@ -301,14 +331,14 @@ def recommendations():
 
     # sign-in
     else:
-        sql_query = " Select selected_genres, selected_cast from users where email= '"+signin_email+"'"
+        sql_query = " Select selected_genres, selected_cast from users where email= '"+session["user"]+"'"
         cursor.execute(sql_query)
         results = cursor.fetchall()
         selected_genres = list(results[0][0].split("$"))
         selected_cast = list(results[0][1].split("$"))
 
     if "user" in session:
-        choice_movies = byChoice(selected_genres, selected_cast, select)
+        choice_movies = byChoice(selected_genres, selected_cast)
         choice_idx = []
         choice_posters = []
         for mov in choice_movies:
@@ -335,7 +365,6 @@ def movie(movie_name):
             u = AnnoyIndex(5000, 'angular')
             u.load('./model/data/vectors.ann')
             movies_list = (u.get_nns_by_item(movie_index, 7))[1:7]
-
 
             recommended_movies = []
             movie_posters = []
@@ -369,16 +398,16 @@ def watch(movie_name):
 
 
 
-otp = ""  
+otp = ""
 # Forgot page
-@app.route('/forgot', methods=['GET','POST'])
+@app.route('/forgot', methods=['POST', 'GET'])
 def forgot():
     global signin_email
     global otp
 
     response = render_template("forgotPass.html")
     if request.method == 'POST':
-        conn = db_connection()
+        conn = db_user_connection()
         cursor = conn.cursor()
 
         signin_email = request.form["email"]
@@ -392,7 +421,7 @@ def forgot():
         else:
             response = "forgot"
 
-    if response=="forgot":
+    if response == "forgot":
         range_start = 10**(6-1)
         range_end = (10**6)-1
         otp = randint(range_start, range_end)
@@ -426,7 +455,7 @@ def change():
     global signin_email
     if request.method == 'POST':
         newPass = request.form["newPass"]
-        conn = db_connection()
+        conn = db_user_connection()
         cursor = conn.cursor()
         sql_query = "Update users set password = '"+newPass+"' where email = '"+signin_email+"'"
         cursor.execute(sql_query)
@@ -454,16 +483,3 @@ if __name__ == "__main__":
 
 # STRING TO LIST
 # ano=list(new.split("$"))
-
-# movie_ids = movies['movie_id'].values
-# for x in range(1, 100):
-#     movie_id = movies.iloc[x].movie_id
-#     print(fetchPoster(movie_id))
-
-    # for i in movie_ids:
-    #     print(fetchPoster(i))
-
-# movie_ids = movies['movie_id'].values
-# for x in range(0, 100):
-#     movie_id = movies.iloc[x].movie_id
-#     print(fetchTrailer(movie_id))
