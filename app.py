@@ -1,11 +1,7 @@
 from utilityFunctions import *
 from SqlQuery import *
-import pickle
-import pandas as pd
-import requests
 from flask import Flask, redirect, render_template, request, jsonify, url_for, session
 import operator
-import sqlite3
 from annoy import AnnoyIndex
 from flask_mail import Mail, Message
 from random import randint
