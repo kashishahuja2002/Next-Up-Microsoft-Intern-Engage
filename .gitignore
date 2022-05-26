@@ -4,3 +4,4 @@ __pycache__
 *.pkl
 .idea
 .ipynb_checkpoints
+.csv
