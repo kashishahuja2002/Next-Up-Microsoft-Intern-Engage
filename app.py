@@ -48,12 +48,20 @@ def db_choice_connection():
         print(e)
     return conn
 
+# movies table
+def db_movies_connection():
+    conn = None
+    try:
+        conn = sqlite3.connect('./model/data/movies.sqlite')
+    except sqlite3.error as e:
+        print(e)
+    return conn
 
-# Data loading
-dataset = pickle.load(open('./model/data/dataset.pkl', 'rb'))
-movies = pd.DataFrame(dataset)
-
-select = pickle.load(open('./model/data/choice.pkl', 'rb'))
+conn = db_movies_connection()
+cursor = conn.cursor()
+sql_query = "Select * from movies"
+cursor.execute(sql_query)
+movies_result = cursor.fetchall()
 
 
 # Home page
@@ -126,20 +134,24 @@ def signin():
 @app.route('/choices', methods=['GET','POST'])
 def choices():
     global signup_email
+    global movies_result
     if "user" in session and session["user"] == signup_email:
+
         genre_names = []
-        for i in movies['genres']:
-            for gen in i:
-                if gen not in genre_names:
+        cast_dict = {}
+        for row in movies_result:
+            mov_gen = list(row[5].split("$"))
+            for gen in mov_gen:
+                if gen not in genre_names and gen != '':
                     genre_names.append(gen)
 
-        cast_dict = {}
-        for row in movies.iterrows():
-            for cast in row[1].cast:
-                if cast in cast_dict:
+            mov_cast = list(row[7].split("$"))
+            for cast in mov_cast:
+                if cast in cast_dict and cast != '':
                     cast_dict[cast] = (cast_dict[cast] + 1)
                 else:
                     cast_dict[cast] = 0
+
         cast_dict = dict(sorted(cast_dict.items(), key=operator.itemgetter(1), reverse=True))
         cast_names = []
         counter = 0
@@ -156,7 +168,9 @@ def choices():
         return redirect(url_for("signup"))
 
 
-movie_names = movies['title'].values
+movie_names = []
+for row in movies_result:
+    movie_names.append(row[2])
 
 def fetchTrailer(movie_id):
     response = requests.get(
@@ -176,8 +190,11 @@ def fetchBackdrop(movie_id):
 
 
 def fetchPoster(movie_id):
-    movie_index = movies[movies['movie_id'] == movie_id].index[0]
-    poster = movies.iloc[movie_index].poster_path
+    for row in movies_result:
+        if row[1] == movie_id:
+            movie_index = row[0]
+            break;
+    poster = movies_result[movie_index][11]
     return poster
 
 
@@ -211,7 +228,7 @@ def byChoice(genreList, castList):
             sql_query = "Update choice set genFre = "+str(gf)+" where movie_id = "+str(row[1])
             cursor.execute(sql_query)
 
-    sql_query = "Select * from choice where (genFre>0 AND castFre >0) order by castFre DESC"
+    sql_query = "Select title from choice where (genFre>0 AND castFre >0) order by castFre DESC"
     cursor.execute(sql_query)
     results = cursor.fetchall()
 
@@ -219,11 +236,10 @@ def byChoice(genreList, castList):
     counter = 0
     for row in results:
         if counter != 3:
-            choice_movies.append(row[2])
+            choice_movies.append(row[0])
             counter += 1
         else:
             break
-
     return choice_movies
 
 
@@ -342,14 +358,17 @@ def recommendations():
         choice_idx = []
         choice_posters = []
         for mov in choice_movies:
-            movie_idx = movies[movies['title'] == mov].index[0]
+            for row in movies_result:
+                if row[2] == mov:
+                    movie_idx = row[0]
+                    movie_id = row[1]
+                    break;
             choice_idx.append(movie_idx)
-            movie_id = movies.iloc[movie_idx].movie_id
             choice_posters.append(fetchBackdrop(movie_id))
         genre_movies, genre_posters = byGenre("Action")
         year_movies, year_posters = byYear("2016")
 
-        return render_template("recommendations.html", movie_names=movie_names, genre_movies=genre_movies, year_movies=year_movies, genre_posters=genre_posters, year_posters=year_posters, choice_idx=choice_idx, movies=movies, choice_posters=choice_posters)
+        return render_template("recommendations.html", movie_names=movie_names, genre_movies=genre_movies, year_movies=year_movies, genre_posters=genre_posters, year_posters=year_posters, choice_idx=choice_idx, movies_result=movies_result, choice_posters=choice_posters)
     else:
         print("Session not found")
         return redirect(url_for("signin"))
@@ -361,27 +380,41 @@ def movie(movie_name):
 
     if "user" in session:
         def recommend(movie):
-            movie_index = movies[movies['title'] == movie].index[0]
+            for row in movies_result:
+                if row[2] == movie:
+                    movie_index = row[0]
+                    break;
             u = AnnoyIndex(5000, 'angular')
             u.load('./model/data/vectors.ann')
-            movies_list = (u.get_nns_by_item(movie_index, 7))[1:7]
+            movies_list = (u.get_nns_by_item(movie_index, 7))[1:7]  # returns index of 6 similar movies
 
             recommended_movies = []
             movie_posters = []
             for i in movies_list:
-                rec_movie_id = movies.iloc[i].movie_id
-                recommended_movies.append(movies.iloc[i].title)
+                rec_movie_id = movies_result[i][1]
+                recommended_movies.append(movies_result[i][2])
                 movie_posters.append(fetchPoster(rec_movie_id))
             return recommended_movies, movie_posters
 
         selected_movie = movie_name
-        movie_idx = movies[movies['title'] == selected_movie].index[0]
-        movie_id = movies.iloc[movie_idx].movie_id
+        for row in movies_result:
+            if row[2] == selected_movie:
+                movie_idx = row[0]
+                movie_id = row[1]
+                break;
         recommendations, posters = recommend(selected_movie)
         trailer_key = fetchTrailer(movie_id)
         movie_poster = fetchPoster(movie_id)
 
-        return render_template("movie.html", movie_names=movie_names, movies=movies, movie_idx=movie_idx, recommendations=recommendations, posters=posters, trailer_key=trailer_key, movie_poster=movie_poster)
+        mov_genre = []
+        mov_cast = []
+        for row in movies_result:
+            mg = list(row[5].split("$"))
+            mov_genre.append(mg)
+            mc = list(row[7].split("$"))
+            mov_cast.append(mc)
+
+        return render_template("movie.html", movie_names=movie_names, movies_result=movies_result, movie_idx=movie_idx, recommendations=recommendations, posters=posters, trailer_key=trailer_key, movie_poster=movie_poster, mov_genre=mov_genre, mov_cast=mov_cast)
     else:
         print("Session not found")
         return redirect(url_for("signin"))
@@ -427,7 +460,6 @@ def forgot():
         otp = randint(range_start, range_end)
         message = Message("NEW3 OTP for password reset", sender="kashishahuja2002@gmail.com", recipients=[signin_email])
         message.body = "OTP: "+str(otp)
-        print(message)
         mail.send(message)
 
     return response
@@ -440,10 +472,9 @@ def reset():
     response = render_template("reset.html")
     if request.method == 'POST':
         num = request.form["otp"]
-        if str(num)==str(otp):
+        if str(num) == str(otp):
             response = "valid"
         else:
-            print(otp, num)
             response = "OTP entered is incorrect"
 
     return response
@@ -476,10 +507,3 @@ if __name__ == "__main__":
     app.run(debug=True)
 
 
-
-# LIST TO STRING
-# s = ['Geeks for geeks', 'for alla', 'Geeks djfh jhsds']
-# new="$".join(s)
-
-# STRING TO LIST
-# ano=list(new.split("$"))

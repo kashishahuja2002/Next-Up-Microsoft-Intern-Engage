@@ -52,13 +52,13 @@
 
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <a href="/movie/{{movies.iloc[choice_idx[0]].title}}">
+                    <a href="/movie/{{movies_result[choice_idx[0]][2]}}">
                         <div class="slider">
                             <div class="slider-content">
                                 <div>
-                                    <h1 class="movie-title">{{movies.iloc[choice_idx[0]].title}}</h1>
-                                    {% if movies.iloc[choice_idx[0]].overview: %}
-                                    <p class="movie-des">{{movies.iloc[choice_idx[0]].overview}}</p>
+                                    <h1 class="movie-title">{{movies_result[choice_idx[0]][2]}}</h1>
+                                    {% if movies_result[choice_idx[0]][4]: %}
+                                    <p class="movie-des">{{movies_result[choice_idx[0]][4]}}</p>
                                     {% endif %}
                                 </div>
                             </div>
@@ -69,13 +69,13 @@
 
                 {%for i in range(1, 3)%}
                 <div class="carousel-item">
-                    <a href="/movie/{{movies.iloc[choice_idx[i]].title}}">
+                    <a href="/movie/{{movies_result[choice_idx[i]][2]}}">
                         <div class="slider">
                             <div class="slider-content">
                                 <div>
-                                    <h1 class="movie-title">{{movies.iloc[choice_idx[i]].title}}</h1>
-                                    {% if movies.iloc[choice_idx[i]].overview: %}
-                                    <p class="movie-des">{{movies.iloc[choice_idx[i]].overview}}</p>
+                                    <h1 class="movie-title">{{movies_result[choice_idx[i]][2]}}</h1>
+                                    {% if movies_result[choice_idx[i]][4]: %}
+                                    <p class="movie-des">{{movies_result[choice_idx[i]][4]}}</p>
                                     {% endif %}
                                 </div>
                             </div>

@@ -50,27 +50,27 @@
             <div class="movie-text col-md-4">
                 <div class="d-flex mx-auto">
                     <div class="text-wrapper">
-                        <h2>{{movies.iloc[movie_idx].title}}</h2>
-                        {% if movies.iloc[movie_idx].tagline: %}
-                        <h4>{{movies.iloc[movie_idx].tagline}}</h4>
+                        <h2>{{movies_result[movie_idx][2]}}</h2>
+                        {% if movies_result[movie_idx][3]: %}
+                        <h4>{{movies_result[movie_idx][3]}}</h4>
                         {% endif %}
                         <small>
-                        {% for item in movies.iloc[movie_idx].genres %}
+                        {% for item in mov_genre[movie_idx] %}
                             {{item}} .
                         {% endfor %}
                         </small> <br>
                         <small>
-                        {% for item in movies.iloc[movie_idx].cast %}
+                        {% for item in mov_cast[movie_idx] %}
                             {{item}} .
                         {% endfor %}
                         </small> <br>
-                        {% if movies.iloc[movie_idx].release_date: %}
-                        <small>{{movies.iloc[movie_idx].release_date}}</small> <br><br>
+                        {% if movies_result[movie_idx][10]: %}
+                        <small>{{movies_result[movie_idx][10]}}</small> <br><br>
                         {% endif %}
-                        {% if movies.iloc[movie_idx].overview: %}
-                        <p class="text-contain">{{movies.iloc[movie_idx].overview}}</p>
+                        {% if movies_result[movie_idx][4]: %}
+                        <p class="text-contain">{{movies_result[movie_idx][4]}}</p>
                         {% endif %} <br> 
-                        <a href="/watch/{{movies.iloc[movie_idx].title}}" class="watch-movie">
+                        <a href="/watch/{{movies_result[movie_idx][2]}}" class="watch-movie">
                             <i class="fa fa-play"></i>
                             Watch Movie
                         </a>
