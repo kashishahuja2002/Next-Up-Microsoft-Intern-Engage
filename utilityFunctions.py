@@ -1,6 +1,7 @@
 from SqlQuery import *
 import requests
 import sqlite3
+import psycopg2
 
 
 # Database connections
@@ -8,7 +9,7 @@ def db_connection(db_name):
     conn = None
     try:
         if db_name == "users":
-            conn = sqlite3.connect("postgres://uqtpxryhwlcazx:c0b39d30a1b2f9415b7aa7777277f7ecd9ad495c0859296ea63cdd1823b1d197@ec2-34-231-221-151.compute-1.amazonaws.com:5432/dc18lg9t4rf23o")
+            conn = psycopg2.connect("postgres://uqtpxryhwlcazx:c0b39d30a1b2f9415b7aa7777277f7ecd9ad495c0859296ea63cdd1823b1d197@ec2-34-231-221-151.compute-1.amazonaws.com:5432/dc18lg9t4rf23o")
         else:
             conn = sqlite3.connect("./model/data/"+db_name+".sqlite")
     except sqlite3.error as e:
