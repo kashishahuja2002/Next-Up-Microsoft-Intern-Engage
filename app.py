@@ -92,6 +92,7 @@ def signin():
                 response = "Incorrect Password."
         elif password == results[0][1]:
             session["user"] = signin_email
+            session["choices"] = 1
             response = "recommendations"
 
     return response
@@ -102,34 +103,36 @@ def signin():
 def choices():
     global signup_email
     global movies_result
-    if "user" in session and session["user"] == signup_email:
+    if "user" in session:
+        if "choices" in session:
+            return redirect(url_for("recommendations"))
+        else:
+            genre_names = []
+            cast_dict = {}
+            for row in movies_result:
+                mov_gen = list(row[5].split("$"))
+                for gen in mov_gen:
+                    if gen not in genre_names and gen != '':
+                        genre_names.append(gen)
 
-        genre_names = []
-        cast_dict = {}
-        for row in movies_result:
-            mov_gen = list(row[5].split("$"))
-            for gen in mov_gen:
-                if gen not in genre_names and gen != '':
-                    genre_names.append(gen)
+                mov_cast = list(row[7].split("$"))
+                for cast in mov_cast:
+                    if cast in cast_dict and cast != '':
+                        cast_dict[cast] = (cast_dict[cast] + 1)
+                    else:
+                        cast_dict[cast] = 0
 
-            mov_cast = list(row[7].split("$"))
-            for cast in mov_cast:
-                if cast in cast_dict and cast != '':
-                    cast_dict[cast] = (cast_dict[cast] + 1)
+            cast_dict = dict(sorted(cast_dict.items(), key=operator.itemgetter(1), reverse=True))
+            cast_names = []
+            counter = 0
+            for key in cast_dict:
+                if counter < 25:
+                    cast_names.append(key)
+                    counter += 1
                 else:
-                    cast_dict[cast] = 0
+                    break
 
-        cast_dict = dict(sorted(cast_dict.items(), key=operator.itemgetter(1), reverse=True))
-        cast_names = []
-        counter = 0
-        for key in cast_dict:
-            if counter < 25:
-                cast_names.append(key)
-                counter += 1
-            else:
-                break
-
-        return render_template("choices.html", genre_names=genre_names, cast_names=cast_names)
+            return render_template("choices.html", genre_names=genre_names, cast_names=cast_names)
     else:
         print("Session not found")
         return redirect(url_for("signup"))
@@ -191,6 +194,7 @@ def recommendations():
             conn.commit()
             print(cursor.lastrowid)
             conn.close()
+            session["choices"] = 1
 
         # sign-in
         else:
@@ -349,6 +353,7 @@ def change():
 @app.route('/logout')
 def logout():
     session.pop("user", None)
+    session.pop("choices", None)
     return redirect(url_for("index"))
 
 
