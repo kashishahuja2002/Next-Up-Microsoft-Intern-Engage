@@ -22,21 +22,21 @@ A deployed version can be checked here: [Next Up](https://next-up-movies.herokua
 
 3. OTP validation. ✔️
 
-   `User receives a mail containing OTP for validation before resetting the password.`
+   `The user receives a mail containing OTP for validation before resetting the password.`
    
-4. User's credentials are stored in database. ✔️
+4. The User’s credentials are stored in the database. ✔️
   
 5. Completely responsive frontend. ✔️
 
-6. A total of 4 types of recommendation:
-  * Recommended movies based on user's chosen genres and casts. ✔️
+6. A total of 4 types of recommendations:
+  * Recommended movies based on the user's chosen genres and casts. ✔️
   * Most popular movies based on different genres. ✔️
   * Most popular movies based on different years. ✔️
-  * Recommended movies similar to user's selected movie. ✔️
+  * Recommended movies similar to the user's selected movie. ✔️
   
 7. Movie details and trailer linked for each movie. ✔️
 
-8. Watch movie option. ✔️
+8. Watch a movie option. ✔️
 
 9. Option to like or dislike a movie. ✔️
 
@@ -56,47 +56,25 @@ A deployed version can be checked here: [Next Up](https://next-up-movies.herokua
 
 ![sign-up page](https://user-images.githubusercontent.com/55057608/170728671-71d36f55-c1e4-4994-8b28-1f60fea80e5a.png)
 
-### Restrictions and validations on sign-up page
-* All fields not filled
-* Already registered email account
-
-![sign-up validations](https://user-images.githubusercontent.com/55057608/170733520-297a73f7-feb2-47d2-9578-f9e7be0c55c3.PNG)
-
 ### Sign-in Page
 
 ![5 - sign-in](https://user-images.githubusercontent.com/55057608/170729606-be135836-b021-45d2-aa37-04051e0acb2f.png)
-
-### Restrictions and validations on sign-in page
-* All fields not filled
-* Email account not registered
-* Incorrect password
-
-![sign-in validations](https://user-images.githubusercontent.com/55057608/170734038-e3226aa3-b716-4865-8a06-af73106922c2.PNG)
-
-### Restrictions and validations on forgot password functionality
-* Email account not entered
-* Email account not registered
-
-![forgot validations](https://user-images.githubusercontent.com/55057608/170734508-cc5822c3-2212-4326-84a7-9a61b5ffc2a9.PNG)
 
 ### OTP Validation Page
 
 ![11 - otp validation](https://user-images.githubusercontent.com/55057608/170730305-cbccfd03-cf80-45aa-b893-734503d01a30.png)
 
-### Restrictions and validations on otp validation page
-* OTP not entered
-* OTP incorrect
-
-![otp validations](https://user-images.githubusercontent.com/55057608/170734963-a6323f6d-575f-4696-b081-fcf05c665525.PNG)
-
 ### Reset password Page
 
 ![14 - reset](https://user-images.githubusercontent.com/55057608/170730899-809feb1c-eb6a-4a06-b6e8-c4ba3ea1085d.png)
 
-### Restrictions and validations on reset password Page
-* New password not entered
+### Restrictions and validations on the sign-up page, sign-in page, forgot password functionality, OTP validation page, and reset password page
+* All fields not filled
+* Email account already registered (sign-up), Email account not registered (sign-in)
+* Incorrect password, OTP incorrect
+* Email address not entered, OTP not entered, new password not entered
 
-![10](https://user-images.githubusercontent.com/55057608/170735074-3ff1e7d0-a8f5-41a8-99c5-4421cd71f8f2.PNG)
+![6 - validations](https://user-images.githubusercontent.com/55057608/170794709-7b6623b8-6fe8-4248-ae0e-c02f49a42034.PNG)
 
 ### Choices Page
 * Page for choosing prefered genres and casts used for recommending movies
@@ -142,9 +120,8 @@ You can also see the list of dependencies in the [requirements.txt](/requirement
 
 
 ## Recommendation Algorithm
-For recommendation of similar movies, I have implemented Cosine Algorithm after vectorization of movies. 
-It is achived by using Annoy (Approximate Nearest Neighbors) mechanism.
-Resource for Annoy: https://github.com/spotify/annoy
+For recommendations of similar movies, a content-based recommendation system. For recommendation, the system takes into account movie titles, genres, starring cast, keywords, overview, and the director. I have implemented Cosine Algorithm after the vectorization of movies. 
+It is achieved by using Annoy (Approximate Nearest Neighbors) mechanism. Resource for Annoy: https://github.com/spotify/annoy
 
 
 ## Deployment
@@ -159,19 +136,21 @@ A deployed version can be checked here: [Next Up](https://next-up-movies.herokua
    git clone https://github.com/kashishahuja2002/Microsoft-Intern-Engage.git
    ```
 
-2. Install dependencies.
+2. Make sure that Python is installed and updated in your machine.
+
+3. Install dependencies.
 * Open terminal in the cloned folder and enter the command given below.
    ```
    pip3 install -r requirements.txt
    ```
   
-3. Run the project.
+4. Run the project.
 * While you are still inside the cloned folder, write the following command in terminal to run the website locally. 
    ```
    python app.py
    ```
    
-4. If everything is done in order, the app will be running at "http://127.0.0.1:5000"
+5. If everything is done in order, the app will be running at "http://127.0.0.1:5000"
 
 
 ## CD Setup
@@ -179,11 +158,11 @@ For continious deployment, heroku is used. Any changes pushed to the main branch
 
 
 ## Future Scope
-* `Like/Dislike` : The option to like or dislike movie adds the movie to user's like/dislike list. As of now, I am just cummulating the data. This can be further extended by using the like/dislike list to recommend movies to the user.
+* `Like/Dislike` : The option to like or dislike a movie adds the movie to the user's like/dislike list. As of now, I am just accumulating the data. This can be further extended by using the like/dislike list to recommend movies to the user.
 
-* `Watch Movie` : The watch movie option currently displays the same movie intro for all the movies. In future, it can be customised according to the movie selected.
+* `Watch Movie` : The watch movie option currently displays the same movie intro for all the movies. In the future, it can be customized according to the movie selected.
 
-* `Collabrative Filtering` : The model currently uses content-based recommendation system. It can be converted into a hybrid system by adding collabrative filtering mechanism. 
+* `Collabrative Filtering` : The model currently uses a content-based recommendation system. It can be converted into a hybrid system by adding a collaborative filtering mechanism.
 
 
 ## Video Demo
