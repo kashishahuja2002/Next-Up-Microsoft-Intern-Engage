@@ -130,7 +130,7 @@ A deployed version can be checked here: [Next Up](https://next-up-movies.herokua
 6. `Version Control` : Git
 7. `Deployment` : Heroku
 
-You can also see the list of dependencies in the [requirements.txt](/blob/main/requirements.txt) file.
+You can also see the list of dependencies in the [requirements.txt](/requirements.txt) file.
 
 
 ## Libraries and Toolkits used
