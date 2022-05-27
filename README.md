@@ -46,7 +46,7 @@ A deployed version can be checked here: [Next Up](https://next-up-movies.herokua
 1. `Frontend` : HTML5, CSS3, JavaScript, BootStrap, jQuery
 2. `Backend` : Python flask
 3. `Database` : SQLite3
-4. `ML model : Jupyter Notebook
+4. `ML model` : Jupyter Notebook
 5. `IDE` : PyCharm
 6. `Deployment` : Heroku
 
