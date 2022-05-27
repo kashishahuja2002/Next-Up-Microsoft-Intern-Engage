@@ -3,7 +3,7 @@
 
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/55057608/170705077-90f2292f-8d71-46de-82f6-75a68a88a2c5.png" alt="Next up image"/>
+  <img src="https://user-images.githubusercontent.com/55057608/170705077-90f2292f-8d71-46de-82f6-75a68a88a2c5.png" alt="Next up image" width="50%" />
 </p>
 
 
@@ -130,7 +130,7 @@ A deployed version can be checked here: [Next Up](https://next-up-movies.herokua
 6. `Version Control` : Git
 7. `Deployment` : Heroku
 
-You can also see the list of dependencies in the `requirements.txt` file.
+You can also see the list of dependencies in the [requirements.txt](/requirements.txt) file.
 
 
 ## Libraries and Toolkits used
