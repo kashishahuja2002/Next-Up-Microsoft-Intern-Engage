@@ -84,26 +84,24 @@ A deployed version can be checked here: [Next Up](https://next-up-movies.herokua
 
 ## Installation/Environment Setup
 1. Clone this repository in your local system.
-  * Make a new folder and open the terminal there.
-  * Write the following command and press enter.
-   
+   * Open terminal in a new folder and enter the command given below.
    ```
    git clone https://github.com/kashishahuja2002/Microsoft-Intern-Engage.git
-   ````
-.
-.
-.
-.
-.
-.
-.
-6. Run the project.
-   * While you are still inside the cloned folder, write the following command to run the website locally. 
- 
- ```
+   ```
+
+2. Install dependencies.
+   * Open terminal in the cloned folder and enter the command given below.
+   ```
+   pip3 install -r requirements.txt
+   ```
+  
+3. Run the project.
+   * While you are still inside the cloned folder, write the following command in terminal to run the website locally. 
+   ```
    python app.py
- ```
-8. If everything is done in order, the app will be running at "http://localhost:3030/landing"
+   ```
+   
+4. If everything is done in order, the app will be running at "http://127.0.0.1:5000"
 
 
 ## CD Setup
