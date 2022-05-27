@@ -1,8 +1,13 @@
+# Next Up - Movie Recommendation System
+## Submission for Microsoft Intern Engage 2022
 
-# Next Up
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/55057608/170705077-90f2292f-8d71-46de-82f6-75a68a88a2c5.png" alt="Next up image"/>
+</p>
 
 
-## Movie Recommendation System
+## Overview
 Next up is a movie recommendation system that offers generalized recommnendations to every user based on movie popularity, genre, and year. 
 The model also give personalized recommendations based on the user's choice of genre and cast.
 Finally, the system suggests similar movies have a higher probability of being liked based on the movie selected by user. 
@@ -42,13 +47,20 @@ A deployed version can be checked here: [Next Up](https://next-up-movies.herokua
 13. Continious deployment. ✔️
 
 
+## Interfaces
+Here I will add images of frontend interfaces.
+
+
 ## Tech Stack and Softwares used
 1. `Frontend` : HTML5, CSS3, JavaScript, BootStrap, jQuery
 2. `Backend` : Python flask
 3. `Database` : SQLite3
 4. `ML model` : Jupyter Notebook
 5. `IDE` : PyCharm
-6. `Deployment` : Heroku
+6. `Version Control` : Git
+7. `Deployment` : Heroku
+
+You can also see the list of dependencies in the `requirements.txt` file.
 
 
 ## Libraries and Toolkits used
@@ -59,7 +71,7 @@ A deployed version can be checked here: [Next Up](https://next-up-movies.herokua
 `SQLite` : sqlite3, SQLAlchemy
 
 
-## Recommendation Algorithms
+## Recommendation Algorithm
 For recommendation of similar movies, I have implemented Cosine Algorithm after vectorization of movies. 
 It is achived by using Annoy (Approximate Nearest Neighbors) mechanism.
 Resource for Annoy: https://github.com/spotify/annoy
@@ -70,23 +82,45 @@ For Deployment, I have used `Heroku` as a platform.
 A deployed version can be checked here: [Next Up](https://next-up-movies.herokuapp.com/)
 
 
-## Project Setup
+## Installation/Environment Setup
 1. Clone this repository in your local system.
+  * Make a new folder and open the terminal there.
+  * Write the following command and press enter.
    
    ```
    git clone https://github.com/kashishahuja2002/Microsoft-Intern-Engage.git
    ````
-2. Local system must have JDK and JRE pre-installed in it.
-3. Pre-installed Netbeans or Eclipse with Apache Tomcat-Server is required.
-4. Open the cloned repository in Netbeans/Eclipse IDE.
-5. Integrate the .jar files available inside the cloned directory in your project.
-6. Now just RUN the Project.
-7. If everything is done in order then this will open the website in your local machine.
+.
+.
+.
+.
+.
+.
+.
+6. Run the project.
+   * While you are still inside the cloned folder, write the following command to run the website locally. 
+ 
+ ```
+   python app.py
+ ```
+8. If everything is done in order, the app will be running at "http://localhost:3030/landing"
 
 
 ## CD Setup
 For continious deployment, heroku is used. Any changes pushed to the main branch will be automatically deployed. 
 
 
+## Future Scope
+* `Like/Dislike` : The option to like or dislike movie adds the movie to user's like/dislike list. As of now, I am just cummulating the data. This can be further extended by using the like/dislike list to recommend movies to the user.
+
+* `Watch Movie` : The watch movie option currently displays the same movie intro for all the movies. In future, it can be customised according to the movie selected.
+
+* `Collabrative Filtering` : The model currently uses content-based recommendation system. It can be converted into a hybrid system by adding collabrative filtering mechanism. 
+
+
 ## Video Demo
-https://user-images.githubusercontent.com/55057608/131963901-8229a2ca-b18d-4e32-8315-b4eb173b9ef3.mp4
+Here I will add the video demo.
+
+
+<br><hr>
+Thank you, Microsoft Team for such a wonderful mentorship program ❤️
