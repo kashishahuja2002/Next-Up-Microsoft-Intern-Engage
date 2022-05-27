@@ -165,6 +165,10 @@ For continious deployment, heroku is used. Any changes pushed to the main branch
 * `Collabrative Filtering` : The model currently uses a content-based recommendation system. It can be converted into a hybrid system by adding a collaborative filtering mechanism.
 
 
+## Documentation
+A complete documentation for the system with use case diagram, web flow, wireframes, etc can be found here: [Next Up | Documentation](https://docs.google.com/document/d/1EG-ZQx-gHjQ-hsqn-2wad1GxZSuBpighV0g_Kbfim3w/edit?usp=sharing)
+
+
 ## Video Demo
 Here I will add the video demo.
 
