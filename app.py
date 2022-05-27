@@ -161,46 +161,47 @@ def getByYear():
 
 
 # Recommendations page
-@app.route('/recommendations', methods=['POST', 'GET'])
+@app.route('/recommendations', methods=['GET', 'POST'])
 def recommendations():
     global signin_email
     global signup_email
 
-    conn = db_connection("users")
-    cursor = conn.cursor()
-    selected_genres = []
-    selected_cast = []
-
-    # sign-up
-    if request.method == 'POST':
-        genreList = request.form.getlist('genre-checkbox')
-        castList = request.form.getlist('cast-checkbox')
-        for i in genreList:
-            selected_genres.append(i.replace("-", " "))
-        for i in castList:
-            selected_cast.append(i.replace("-", " "))
-
-        # insert into database on signup
-        sg = ("$".join(selected_genres))
-        sc = ("$".join(selected_cast))
-        global signup_password
-        global signup_mobile
-
-        cursor.execute(INSERT_USER, (signup_email, signup_password, signup_mobile, sg, sc))
-        conn.commit()
-        print(cursor.lastrowid)
-        conn.close()
-
-    # sign-in
-    else:
-        sql_query = " Select selected_genres, selected_cast from users where email= '"+session["user"]+"'"
-        cursor.execute(sql_query)
-        results = cursor.fetchall()
-        conn.close()
-        selected_genres = list(results[0][0].split("$"))
-        selected_cast = list(results[0][1].split("$"))
-
     if "user" in session:
+        conn = db_connection("users")
+        cursor = conn.cursor()
+        selected_genres = []
+        selected_cast = []
+
+        # sign-up
+        if request.method == 'POST':
+            genreList = request.form.getlist('genre-checkbox')
+            castList = request.form.getlist('cast-checkbox')
+            for i in genreList:
+                selected_genres.append(i.replace("-", " "))
+            for i in castList:
+                selected_cast.append(i.replace("-", " "))
+
+            # insert into database on signup
+            sg = ("$".join(selected_genres))
+            sc = ("$".join(selected_cast))
+            global signup_password
+            global signup_mobile
+
+            cursor.execute(INSERT_USER, (signup_email, signup_password, signup_mobile, sg, sc))
+            conn.commit()
+            print(cursor.lastrowid)
+            conn.close()
+
+        # sign-in
+        else:
+            sql_query = " Select selected_genres, selected_cast from users where email= '"+session["user"]+"'"
+            cursor.execute(sql_query)
+            results = cursor.fetchall()
+            conn.close()
+            selected_genres = list(results[0][0].split("$"))
+            selected_cast = list(results[0][1].split("$"))
+
+
         choice_movies = byChoice(selected_genres, selected_cast)
         choice_idx = []
         choice_posters = []
@@ -271,7 +272,7 @@ def movie(movie_name):
 @app.route('/watch/<movie_name>')
 def watch(movie_name):
     if "user" in session:
-        return render_template("watch.html", movie_name=movie_name)
+        return render_template("watch.html", movie_name=movie_name, movie_names=movie_names)
     else:
         print("Session not found")
         return redirect(url_for("signin"))

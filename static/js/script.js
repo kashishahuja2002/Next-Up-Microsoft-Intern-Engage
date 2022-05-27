@@ -1,4 +1,6 @@
 const baseUrl = "https://next-up-movies.herokuapp.com/"
+//const baseUrl = "http://127.0.0.1:5000/"
+var url = baseUrl
 
 // Header
 
@@ -13,7 +15,7 @@ function movieSelect()
     let selection = document.getElementById('movieSelect');
     let selectedMovie = selection.options[selection.selectedIndex].text;
 
-    var url = baseUrl+"movie/"+selectedMovie;
+    url = baseUrl+"movie/"+selectedMovie;
     window.location.href = url;
 }
 
@@ -34,7 +36,7 @@ $(document).ready(function() {
                     document.getElementById("error").innerHTML = errorMsg;
             }
             else {
-                var url = baseUrl+"signup";
+                url = baseUrl+"signup";
                 $.post(url, {
                     email: email,
                     mobile: mobile,
@@ -42,7 +44,7 @@ $(document).ready(function() {
                 },function(data, status) {
                     console.log(data, status);
                     if(data == "choices") {
-                        var url = baseUrl+"choices";
+                        url = baseUrl+"choices";
                         window.location.href = url;
                     }
                     else {
@@ -74,14 +76,14 @@ $(document).ready(function() {
                     document.getElementById("error-msg").innerHTML = errorMsg;
             }
             else {
-                var url = baseUrl+"signin";
+                url = baseUrl+"signin";
                 $.post(url, {
                     email: email,
                     password: password,
                 },function(data, status) {
                     console.log(data, status);
                     if(data == "recommendations") {
-                        var url = baseUrl+"recommendations";
+                        url = baseUrl+"recommendations";
                         window.location.href = url;
                     }
                     else {
@@ -107,13 +109,13 @@ $(document).ready(function() {
                 event.preventDefault();
             }
             else {
-                var url = baseUrl+"forgot";
+                url = baseUrl+"forgot";
                 $.post(url, {
                     email: email,
                 },function(data, status) {
                     console.log(data, status);
                     if(data == "forgot") {
-                        var url = baseUrl+"forgot";
+                        url = baseUrl+"forgot";
                         window.location.href = url;
                     }
                     else {
@@ -144,13 +146,13 @@ $(document).ready(function() {
                 document.getElementById("err").innerHTML = errorMsg;
             }
             else {
-                var url = baseUrl+"reset";
+                url = baseUrl+"reset";
                 $.post(url, {
                     otp: otp,
                 },function(data, status) {
                     console.log(data, status);
                     if(data == "valid") {
-                        var url = baseUrl+"reset";
+                        url = baseUrl+"reset";
                         window.location.href = url;
                     }
                     else {
@@ -181,12 +183,12 @@ $(document).ready(function() {
                 document.getElementById("reset-err").innerHTML = errorMsg;
             }
             else {
-                var url = baseUrl+"change";
+                url = baseUrl+"change";
                 $.post(url, {
                     newPass: newPass,
                 },function(data, status) {
                     console.log(data, status);
-                    var url = baseUrl+"recommendations";
+                    url = baseUrl+"recommendations";
                     window.location.href = url;
                 });
             }
@@ -212,7 +214,7 @@ function genreSelected()
 {
     let selection = document.getElementById("genres");
     let selectedGenre = selection.options[selection.selectedIndex].text;
-    var url = baseUrl+"getByGenre";
+    url = baseUrl+"getByGenre";
     $.post(url, {
         genre: selectedGenre,
     },function(data, status) {
@@ -228,7 +230,7 @@ function genreSelected()
 function yearSelected() {
     let selection = document.getElementById("years");
     let selectedYear = selection.options[selection.selectedIndex].text;
-    var url = baseUrl+"getByYear";
+    url = baseUrl+"getByYear";
     $.post(url, {
         year: selectedYear,
     },function(data, status) {
