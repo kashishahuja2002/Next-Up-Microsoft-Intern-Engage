@@ -7,7 +7,10 @@ import sqlite3
 def db_connection(db_name):
     conn = None
     try:
-        conn = sqlite3.connect("./model/data/"+db_name+".sqlite")
+        if db_name == "users":
+            conn = sqlite3.connect('DATABASE_URL')
+        else:
+            conn = sqlite3.connect("./model/data/"+db_name+".sqlite")
     except sqlite3.error as e:
         print(e)
     return conn

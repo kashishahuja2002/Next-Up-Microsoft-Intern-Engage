@@ -347,7 +347,7 @@ def change():
         session["user"] = signin_email
         session["choices"] = 1
 
-    return redirect(url_for("recommendations"))
+    return "recommendations"
 
 
 # Logout
