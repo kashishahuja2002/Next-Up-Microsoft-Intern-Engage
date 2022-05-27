@@ -31,6 +31,11 @@ movies_result = cursor.fetchall()
 conn.close()
 
 
+# Clear session
+session.pop("user", None)
+session.pop("choices", None)
+
+
 # Home page
 @app.route('/')
 def index():
