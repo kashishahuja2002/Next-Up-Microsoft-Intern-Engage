@@ -188,8 +188,6 @@ $(document).ready(function() {
                     newPass: newPass,
                 },function(data, status) {
                     console.log(data, status);
-                    url = baseUrl+"recommendations";
-                    window.location.href = url;
                 });
             }
 

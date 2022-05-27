@@ -310,7 +310,7 @@ def forgot():
         range_start = 10**(6-1)
         range_end = (10**6)-1
         otp = randint(range_start, range_end)
-        message = Message("NEW3 OTP for password reset", sender="kashishahuja2002@gmail.com", recipients=[signin_email])
+        message = Message("Next Up | OTP for password reset", sender="kashishahuja2002@gmail.com", recipients=[signin_email])
         message.body = "OTP: "+str(otp)
         mail.send(message)
 
@@ -345,8 +345,9 @@ def change():
         conn.commit()
         conn.close()
         session["user"] = signin_email
+        session["choices"] = 1
 
-    return "recommendations"
+    return redirect(url_for("recommendations"))
 
 
 # Logout
