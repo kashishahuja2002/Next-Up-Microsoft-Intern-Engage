@@ -172,7 +172,7 @@ A complete documentation for the system with use case diagram, web flow, wirefra
 
 
 ## Video Demo
-Here I will add the video demo.
+The demo video for the app can be checked here: [Next Up | Video](https://youtu.be/2bBJNJMQEnY)
 
 
 <br><hr>
