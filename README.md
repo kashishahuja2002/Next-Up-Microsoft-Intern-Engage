@@ -102,7 +102,7 @@ A deployed version can be checked here: [Next Up](https://next-up-movies.herokua
 ## Tech Stack and Softwares used
 1. `Frontend` : HTML5, CSS3, JavaScript, BootStrap, jQuery
 2. `Backend` : Python flask
-3. `Database` : SQLite3
+3. `Database` : PostgreSQL, SQLite3
 4. `ML model` : Jupyter Notebook
 5. `IDE` : PyCharm
 6. `Version Control` : Git
@@ -166,7 +166,7 @@ For continious deployment, heroku is used. Any changes pushed to the main branch
 
 
 ## Documentation
-A complete documentation for the system with use case diagram, web flow, wireframes, etc can be found here: [Next Up | Documentation](https://docs.google.com/document/d/1EG-ZQx-gHjQ-hsqn-2wad1GxZSuBpighV0g_Kbfim3w/edit?usp=sharing)
+A complete documentation for the system with use case diagram, web flow, wireframes, etc can be found here: [Next Up | Documentation](https://drive.google.com/file/d/1G9a-zrCRGhlpDcppCtrvO0LJBq6CSKec/view?usp=sharing)
 
 
 ## Video Demo
