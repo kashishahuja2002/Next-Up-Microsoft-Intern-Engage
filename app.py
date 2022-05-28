@@ -32,8 +32,10 @@ conn.close()
 
 
 # Clear session
-session.pop("user", None)
-session.pop("choices", None)
+if "user" in session:
+    session.pop("user", None)
+if "choices" in session:
+    session.pop("choices", None)
 
 
 # Home page
