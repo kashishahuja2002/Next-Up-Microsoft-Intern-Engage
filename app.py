@@ -31,13 +31,6 @@ movies_result = cursor.fetchall()
 conn.close()
 
 
-# Clear session
-# if "user" in session:
-#     session.pop("user", None)
-# if "choices" in session:
-#     session.pop("choices", None)
-
-
 # Home page
 @app.route('/')
 def index():
@@ -72,6 +65,7 @@ def signup():
             response = "This email is already registered. <br> Please sign-in."
         else:
             session["user"] = signup_email
+            session["choices"] = 0
             response = "choices"
     return response
 
@@ -113,7 +107,7 @@ def choices():
     global signup_email
     global movies_result
     if "user" in session:
-        if "choices" in session:
+        if "choices" in session and session["choices"] == 1:
             return redirect(url_for("recommendations"))
         else:
             genre_names = []
@@ -198,7 +192,6 @@ def recommendations():
             sc = ("$".join(selected_cast))
             global signup_password
             global signup_mobile
-
             cursor.execute(INSERT_USER, (signup_email, signup_password, signup_mobile, sg, sc))
             conn.commit()
             print(cursor.lastrowid)

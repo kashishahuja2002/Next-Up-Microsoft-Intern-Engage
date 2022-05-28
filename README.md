@@ -23,26 +23,28 @@ A deployed version can be checked here: [Next Up](https://next-up-movies.herokua
 3. OTP validation. ✔️
 
    `The user receives a mail containing OTP for validation before resetting the password.`
-   
-4. The User’s credentials are stored in the database. ✔️
-  
-5. Completely responsive frontend. ✔️
 
-6. A total of 4 types of recommendations:
+4. Restrictions and validations on the sign-up page, sign-in page, forgot password functionality, OTP validation page, and reset password page. ✔️
+   
+5. The User’s credentials are stored in the database. ✔️
+  
+6. Completely responsive frontend. ✔️
+
+7. A total of 4 types of recommendations:
   * Recommended movies based on the user's chosen genres and casts. ✔️
   * Most popular movies based on different genres. ✔️
   * Most popular movies based on different years. ✔️
   * Recommended movies similar to the user's selected movie. ✔️
   
-7. Movie details and trailer linked for each movie. ✔️
+8. Movie details and trailer linked for each movie. ✔️
 
-8. Watch a movie option. ✔️
+9. Watch a movie option. ✔️
 
-9. Option to like or dislike a movie. ✔️
+10. Option to like or dislike a movie. ✔️
 
-10. Client-side session tracking. ✔️
+11. Client-side session tracking. ✔️
 
-11. Continious deployment. ✔️
+12. Continious deployment. ✔️
 
 
 ## Interfaces
