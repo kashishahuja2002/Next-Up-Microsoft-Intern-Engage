@@ -178,8 +178,17 @@ def recommendations():
         selected_genres = []
         selected_cast = []
 
+        sql_query = " Select selected_genres, selected_cast from users where email= '" + session["user"] + "'"
+        cursor.execute(sql_query)
+        results = cursor.fetchall()
+
+        # sign-in
+        if len(results) != 0:
+            selected_genres = list(results[0][0].split("$"))
+            selected_cast = list(results[0][1].split("$"))
+
         # sign-up
-        if request.method == 'POST':
+        else:
             genreList = request.form.getlist('genre-checkbox')
             castList = request.form.getlist('cast-checkbox')
             for i in genreList:
@@ -198,16 +207,7 @@ def recommendations():
             conn.close()
             session["choices"] = 1
 
-        # sign-in
-        else:
-            sql_query = " Select selected_genres, selected_cast from users where email= '"+session["user"]+"'"
-            cursor.execute(sql_query)
-            results = cursor.fetchall()
-            conn.close()
-            selected_genres = list(results[0][0].split("$"))
-            selected_cast = list(results[0][1].split("$"))
-
-
+        conn.close()
         choice_movies = byChoice(selected_genres, selected_cast)
         choice_idx = []
         choice_posters = []
