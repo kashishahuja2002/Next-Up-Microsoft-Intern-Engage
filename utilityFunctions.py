@@ -9,7 +9,7 @@ def db_connection(db_name):
     conn = None
     try:
         if db_name == "users":
-            conn = psycopg2.connect("postgres://umskvhjcqkyctz:aa08618da326a858e0f066afa824bdbd84330a158d9647e82b950e123c3d8899@ec2-54-211-255-161.compute-1.amazonaws.com:5432/d5rhim06g4g2p1")
+            conn = psycopg2.connect("postgres://mhldgvpkokhorj:84b82ac4b9d5b6834e371a2031d243a0c8eb52d779c85bc140ca1ddbcefa5415@ec2-3-211-221-185.compute-1.amazonaws.com:5432/dak9afk7el8um7")
         else:
             conn = sqlite3.connect("./model/data/"+db_name+".sqlite")
     except sqlite3.error as e:
