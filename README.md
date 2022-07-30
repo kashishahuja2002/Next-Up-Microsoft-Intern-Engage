@@ -168,7 +168,7 @@ For continious deployment, heroku is used. Any changes pushed to the main branch
 
 
 ## Documentation
-A complete documentation for the system with use case diagram, web flow, wireframes, etc can be found here: [Next Up | Documentation](https://drive.google.com/file/d/1G9a-zrCRGhlpDcppCtrvO0LJBq6CSKec/view?usp=sharing)
+A complete documentation for the system with use case diagram, web flow, wireframes, etc can be found here: [Next Up | Documentation](/Next%20Up%20_%20Documentation.pdf).
 
 
 ## Video Demo
