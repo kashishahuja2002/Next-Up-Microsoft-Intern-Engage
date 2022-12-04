@@ -1,5 +1,6 @@
 # Next Up - Movie Recommendation System
-## Submission for Microsoft Intern Engage 2022
+<!-- ## Submission for Microsoft Intern Engage 2022 -->
+## Submission for M.Tech (IT) minor project - IIPS, DAVV
 
 
 <p align="center">
@@ -134,8 +135,11 @@ A deployed version can be checked here: [Next Up](https://next-up-movies.herokua
 ## Installation/Environment Setup
 1. Clone this repository in your local system.
 * Open terminal in a new folder and enter the command given below.
-   ```
+   <!-- ```
    git clone https://github.com/kashishahuja2002/Microsoft-Intern-Engage.git
+   ``` -->
+   ```
+   git clone https://github.com/kashishahuja2002/Minor-Project-Next-Up.git
    ```
 
 2. Make sure that Python is installed and updated in your machine.
@@ -176,4 +180,4 @@ The demo video for the app can be checked here: [Next Up | Video](https://youtu.
 
 
 <br><hr>
-Thank you, Microsoft Team for such a wonderful mentorship program ❤️
+<!-- Thank you, Microsoft Team for such a wonderful mentorship program ❤️ -->

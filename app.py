@@ -205,7 +205,7 @@ def recommendations():
             conn.commit()
             print(cursor.lastrowid)
             conn.close()
-            session["choices"] = 1
+            # session["choices"] = 1
 
         conn.close()
         choice_movies = byChoice(selected_genres, selected_cast)
