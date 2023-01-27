@@ -172,11 +172,11 @@ For continious deployment, heroku is used. Any changes pushed to the main branch
 
 
 ## Documentation
-A complete project report for the system with use case diagram, web flow, ER diagram, wireframes, etc can be found here: [Next Up | Project Report](/ProjectReport.docx.pdf).
+A complete project report for the system with use case diagram, web flow, ER diagram, wireframes, etc can be found here: [Next Up | Project Report](/documents/ProjectReport.docx.pdf).
 
-A short and crisp version of the documentation can be found here: [Next Up | Documentation](/Documentation.pdf).
+A short and crisp version of the documentation can be found here: [Next Up | Documentation](/documents/Documentation.pdf).
 
-A presentation for the project can be found here: [Next Up | Presentation](/Presentation.pdf).
+A presentation for the project can be found here: [Next Up | Presentation](/documents/Presentation.pdf).
 
 
 ## Video Demo
