@@ -1,6 +1,6 @@
 # Next Up - Movie Recommendation System
 <!-- ## Submission for Microsoft Intern Engage 2022 -->
-## Submission for M.Tech (IT) minor project - IIPS, DAVV
+## Submission for Microsoft Intern Engage '22
 
 
 <p align="center">
@@ -184,4 +184,4 @@ The demo video for the app can be checked here: [Next Up | Video](https://youtu.
 
 
 <br><hr>
-<!-- Thank you, Microsoft Team for such a wonderful mentorship program ❤️ -->
+Thank you, Microsoft Team for such a wonderful mentorship program ❤️
