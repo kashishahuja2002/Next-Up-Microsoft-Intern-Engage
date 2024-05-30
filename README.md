@@ -13,8 +13,6 @@ Next up is a movie recommendation system that offers generalized recommnendation
 The model also give personalized recommendations based on the user's choice of genre and cast.
 Finally, the system suggests similar movies have a higher probability of being liked based on the movie selected by user. 
 
-A deployed version can be checked here: [Next Up](https://next-up-movies.herokuapp.com/)
-
 
 ## Features
 1. Sign-up and Sign-in functionality. ✔️
